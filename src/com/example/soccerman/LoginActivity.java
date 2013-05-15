@@ -14,7 +14,8 @@ import android.widget.TextView;
 import library.DatabaseHandler;
 import library.UserFunctions;
  
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity
+{
     Button btnLogin;
     Button btnLinkToRegister;
     EditText inputEmail;
@@ -29,7 +30,8 @@ public class LoginActivity extends Activity {
     private static String KEY_CREATED_AT = "created_at";
  
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
  
@@ -41,7 +43,8 @@ public class LoginActivity extends Activity {
         loginErrorMsg = (TextView) findViewById(R.id.login_error);
  
         // Login button Click Event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener()
+        {
  
             public void onClick(View view) {
                 String email = inputEmail.getText().toString();

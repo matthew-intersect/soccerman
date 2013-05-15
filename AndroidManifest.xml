@@ -4,9 +4,12 @@
     android:versionCode="1"
     android:versionName="1.0" >
  
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk
+        android:minSdkVersion="8" />
+     
  
     <application
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
@@ -22,15 +25,19 @@
         <!--  Login Activity -->
         <activity
             android:label="Login Account"
-            android:name=".LoginActivity"></activity>
+            android:name=".LoginActivity" />
  
         <!--  Register Activity -->
         <activity
             android:label="Register New Account"
-            android:name=".RegisterActivity"></activity>
+            android:name=".RegisterActivity" />
+        
+        <!--  Add Team Activity -->
+        <activity
+            android:label="Add Team"
+            android:name=".AddTeamActivity" />
     </application>
-     
-    <!-- Allow to connect with internet -->
+    <!-- Allow to connect to Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
  
 </manifest>

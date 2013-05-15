@@ -10,6 +10,10 @@
     <string name="fullname">Full Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="add_team">Add Team</string>
+    <string name="team_name">Team Name</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
     <string name="already_registered">Already registered? Login now</string>
     <string name="register_now">I don\'t have an account. Register now</string>
 
