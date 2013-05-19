@@ -17,6 +17,15 @@
             android:inputType="text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+    
+    <!--  Error message -->
+        <TextView android:id="@+id/add_team_error"
+            android:textIsSelectable="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#e30000"
+            android:padding="10dip"
+            android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnAddTeam"

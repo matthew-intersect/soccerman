@@ -11,7 +11,7 @@ import library.UserFunctions;
 public class DashboardActivity extends Activity
 {
     UserFunctions userFunctions;
-    Button btnLogout, btnAddTeam;
+    Button btnLogout, btnAddTeam, btnMyTeams;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -24,6 +24,7 @@ public class DashboardActivity extends Activity
             setContentView(R.layout.dashboard);
             btnLogout = (Button) findViewById(R.id.btnLogout);
             btnAddTeam = (Button) findViewById(R.id.btnAddTeam);
+            btnMyTeams = (Button) findViewById(R.id.btnMyTeams);
              
             btnLogout.setOnClickListener(new View.OnClickListener()
             {
@@ -45,6 +46,16 @@ public class DashboardActivity extends Activity
                     startActivity(addTeam);
                     finish();
                 }
+            });
+            
+            btnMyTeams.setOnClickListener(new View.OnClickListener()
+            {
+            	public void onClick(View arg0)
+            	{
+            		Intent teamList = new Intent(getApplicationContext(), MyTeamListActivity.class);
+            		startActivity(teamList);
+            		finish();
+            	}
             });
         }
         else

@@ -24,6 +24,26 @@
     
     <Button android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="@string/my_teams"
+        android:textSize="20sp"
+        android:textColor="#21dbd4"
+        android:textStyle="bold"
+        android:id="@+id/btnMyTeams"
+        android:layout_marginTop="40dip"
+        android:background="@null"/>
+    
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/join_team"
+        android:textSize="20sp"
+        android:textColor="#21dbd4"
+        android:textStyle="bold"
+        android:id="@+id/btnJoinTeam"
+        android:layout_marginTop="40dip"
+        android:background="@null"/>
+    
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="@string/logout"
         android:textSize="20sp"
         android:textColor="#21dbd4"

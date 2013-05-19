@@ -57,7 +57,8 @@ public class LoginActivity extends Activity
                     if (json.getString(KEY_SUCCESS) != null) {
                         loginErrorMsg.setText("");
                         String res = json.getString(KEY_SUCCESS); 
-                        if(Integer.parseInt(res) == 1){
+                        if(Integer.parseInt(res) == 1)
+                        {
                             // user successfully logged in
                             // Store user details in SQLite Database
                             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
@@ -76,8 +77,9 @@ public class LoginActivity extends Activity
                              
                             // Close Login Screen
                             finish();
-                        }else{
-                            // Error in login
+                        }
+                        else
+                        {
                             loginErrorMsg.setText("Incorrect username/password");
                         }
                     }

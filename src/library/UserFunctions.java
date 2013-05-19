@@ -9,7 +9,8 @@ import org.json.JSONObject;
  
 import android.content.Context;
  
-public class UserFunctions {
+public class UserFunctions 
+{
      
     private JSONParser jsonParser;
      
@@ -64,12 +65,31 @@ public class UserFunctions {
     }
      
     /**
+     * Function get logged in user's id
+     * */
+    public String getLoggedInUserId(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	return db.getUserDetails().get("uid");
+    }
+    
+    /**
+     * Function get logged in user's name
+     * */
+    public int getLoggedInUserName(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	return Integer.valueOf(db.getUserDetails().get("name"));
+    }
+    
+    /**
      * Function get Login status
      * */
     public boolean isUserLoggedIn(Context context){
         DatabaseHandler db = new DatabaseHandler(context);
         int count = db.getRowCount();
-        if(count > 0){
+        if(count > 0)
+        {
             // user logged in
             return true;
         }
