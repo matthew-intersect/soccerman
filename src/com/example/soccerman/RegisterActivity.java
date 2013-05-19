@@ -24,9 +24,9 @@ public class RegisterActivity extends Activity {
      
     // JSON Response node names
     private static String KEY_SUCCESS = "success";
-    private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
+    private static String KEY_ID = "id";
     private static String KEY_CREATED_AT = "created_at";
  
     @Override
@@ -64,7 +64,7 @@ public class RegisterActivity extends Activity {
                              
                             // Clear all previous data in database
                             userFunction.logoutUser(getApplicationContext());
-                            db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+                            db.addUser(json.getInt(KEY_ID), json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_CREATED_AT));                        
                             // Launch Dashboard Screen
                             Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
                             // Close all views before launching Dashboard

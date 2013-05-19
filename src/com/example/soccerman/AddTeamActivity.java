@@ -48,7 +48,6 @@ public class AddTeamActivity extends Activity
 	            	public void onClick(View view) 
 	            	{
 	            		String name = inputTeamName.getText().toString();
-	            		UserFunctions userFunctions = new UserFunctions();
 	                	String created_by = userFunctions.getLoggedInUserId(getApplicationContext());
 	                	
 	                	TeamFunctions teamFunctions = new TeamFunctions();
@@ -92,7 +91,6 @@ public class AddTeamActivity extends Activity
 		                		}
 		                		else 
 		                		{
-		                			
 		                			addTeamErrorMsg.setText("Team name aleady taken/can't be blank");
 		                		}
 	                		}

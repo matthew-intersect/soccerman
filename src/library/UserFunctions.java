@@ -70,7 +70,7 @@ public class UserFunctions
     public String getLoggedInUserId(Context context)
     {
     	DatabaseHandler db = new DatabaseHandler(context);
-    	return db.getUserDetails().get("uid");
+    	return db.getUserDetails().get("id");
     }
     
     /**

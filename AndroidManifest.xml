@@ -43,6 +43,10 @@
             android:label="My Teams"
             android:name=".MyTeamsListActivity" />
         
+        <activity
+            android:label="Join Team"
+            android:name=".JoinTeamActivity" />
+        
     </application>
  
 </manifest>

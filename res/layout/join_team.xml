@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3b3b3b"
+    android:orientation="vertical" 
+    android:gravity="center_vertical" 
+    android:padding="10dip">
+    
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/join_team" />
+    <EditText
+            android:id="@+id/joinTeamCode"
+            android:inputType="text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    
+    <!--  Error message -->
+    <TextView android:id="@+id/join_team_error"
+        android:textIsSelectable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#e30000"
+        android:padding="10dip"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnJoinTeam"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:text="@string/join" />
+    
+    <Button
+            android:id="@+id/btnCancelJoinTeam"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:text="@string/cancel"
+            android:textColor="#21dbd4"
+            android:textStyle="bold" />
+    
+</LinearLayout>
