@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="10dip">
+    
+    <TextView
+		android:id="@+id/list_team_name"
+		android:layout_width="wrap_content"
+		android:layout_height="20dip"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:textStyle="bold"
+		android:singleLine="true"
+		android:ellipsize="marquee"
+    />
+    
+    <TextView
+		android:id="@+id/managed_by"
+		android:layout_width="wrap_content"
+		android:layout_height="20dip"
+		android:layout_alignParentLeft="true"
+		android:layout_below="@id/list_team_name"
+		android:gravity="center_vertical"
+		android:text="@string/manager"
+	 	/>
+   
+   	<TextView
+		android:id="@+id/list_team_manager"
+		android:layout_width="fill_parent"
+		android:layout_height="20dip"
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/list_team_name"
+		android:layout_toRightOf="@id/managed_by"
+		android:textStyle="bold"
+		android:gravity="center_vertical"
+	 	/>
+    
+</RelativeLayout>

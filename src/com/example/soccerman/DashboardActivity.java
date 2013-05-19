@@ -55,7 +55,6 @@ public class DashboardActivity extends Activity
             	{
             		Intent teamList = new Intent(getApplicationContext(), MyTeamListActivity.class);
             		startActivity(teamList);
-            		finish();
             	}
             });
             

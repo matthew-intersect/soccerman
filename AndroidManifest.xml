@@ -41,7 +41,7 @@
         
         <activity
             android:label="My Teams"
-            android:name=".MyTeamsListActivity" />
+            android:name=".MyTeamListActivity" />
         
         <activity
             android:label="Join Team"

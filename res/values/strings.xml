@@ -18,7 +18,10 @@
     <string name="my_teams">My Teams</string>
     <string name="join_team">Join Team</string>
     <string name="join">Join</string>
+    <string name="no_teams">No teams to display</string>
+    <string name="manager">Manager: </string>
     <string name="already_registered">Already registered? Login now</string>
     <string name="register_now">I don\'t have an account. Register now</string>
+    <string name="back_to_menu">Back to menu</string>
 
 </resources>
