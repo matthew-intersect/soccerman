@@ -84,6 +84,7 @@ public class AddTeamActivity extends Activity
 										{
 											Intent dash = new Intent(AddTeamActivity.this, DashboardActivity.class);
 											dash.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+											dialog.dismiss();
 											startActivity(dash);
 										}
 		                			});

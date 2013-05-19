@@ -17,6 +17,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
  
+import android.annotation.SuppressLint;
+import android.os.StrictMode;
 import android.util.Log;
  
 public class JSONParser {
@@ -30,9 +32,11 @@ public class JSONParser {
  
     }
  
-    public JSONObject getJSONFromUrl(String url, List<NameValuePair> params) {
- 
-        // Making HTTP request
+    @SuppressLint("NewApi")
+	public JSONObject getJSONFromUrl(String url, List<NameValuePair> params) 
+    {
+    	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+    	StrictMode.setThreadPolicy(policy); 
         try {
             // defaultHttpClient
             DefaultHttpClient httpClient = new DefaultHttpClient();
