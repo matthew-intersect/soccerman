@@ -48,6 +48,10 @@
             android:label="Join Team"
             android:name=".JoinTeamActivity" />
         
+        <activity
+            android:label="Add Match"
+            android:name=".AddMatchActivity" />
+        
     </application>
  
 </manifest>

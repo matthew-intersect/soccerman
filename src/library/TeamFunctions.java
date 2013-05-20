@@ -73,7 +73,8 @@ public class TeamFunctions
         try
         {
         	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
-        	if(Integer.parseInt(json.getString("success")) == 1) {
+        	if(Integer.parseInt(json.getString("success")) == 1)
+        	{
 	        	ArrayList<Team> teams = new ArrayList<Team>();
 	        	JSONArray array = json.getJSONArray("teams");
 	        	
@@ -88,7 +89,8 @@ public class TeamFunctions
         		return new ArrayList<Team>();
         	}
         }
-        catch (JSONException e) {
+        catch (JSONException e) 
+        {
         	return new ArrayList<Team>();
         }
 	}

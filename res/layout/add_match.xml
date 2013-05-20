@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3b3b3b"
+    android:orientation="vertical" 
+    android:gravity="center_vertical" 
+    android:padding="10dip">
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/opponent"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    
+   	<EditText
+   	    android:id="@+id/opponent"
+   	    android:inputType="text"
+   	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+   	
+   	<TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/venue"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    
+   	<EditText
+   	    android:id="@+id/venue"
+   	    android:inputType="text"
+   	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+   	
+   	<Button 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
+	    android:text="@string/add_match" 
+	    android:onClick="showDatePickerDialog" />
+   	
+   	<Button
+            android:id="@+id/btnCancelAddMatch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:text="@string/cancel"
+            android:textColor="#21dbd4"
+            android:textStyle="bold" />
+   	
+    
+</LinearLayout>

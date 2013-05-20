@@ -13,8 +13,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
+import android.widget.ListView;
 
 @SuppressLint("HandlerLeak")
 public class MyTeamListActivity extends ListActivity
@@ -54,7 +60,36 @@ public class MyTeamListActivity extends ListActivity
         Thread thread =  new Thread(null, viewParts, "MagentoBackground");
         thread.start();
 	}
-        
+	
+	public void onListItemClick(ListView l, View v, int pos, long id)
+	{
+		l.showContextMenuForChild(v);
+	}
+    
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
+	{
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.team_list_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) 
+	{
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    switch (item.getItemId()) {
+	    case R.id.add_match:
+	        Intent addMatch = new Intent(MyTeamListActivity.this, AddMatchActivity.class);
+	        addMatch.putExtra("teamId", teams.get(info.position).getId());
+	        startActivity(addMatch);
+	        return true;
+	    case R.id.view_matches:
+	    	return true;
+	    }
+	    return false;
+	}
+	
 	private Handler handler = new Handler()
    	{
     	public void handleMessage(Message msg)
@@ -66,6 +101,7 @@ public class MyTeamListActivity extends ListActivity
    			teamAdapter = new TeamAdapter(MyTeamListActivity.this, R.layout.team_list_item, teams);
 
    	        setListAdapter(teamAdapter);
+   	        registerForContextMenu(getListView());
    		}
    	};
 }

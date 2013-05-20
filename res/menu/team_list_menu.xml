@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add_match" android:title="@string/add_match" />
+    <item android:id="@+id/view_matches" android:title="@string/view_matches" />
+</menu>
