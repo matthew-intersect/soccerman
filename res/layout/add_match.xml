@@ -34,10 +34,41 @@
         android:layout_height="wrap_content" />
    	
    	<Button 
-	    android:layout_width="fill_parent" 
+   	    android:id="@+id/set_date_btn"
+	    android:layout_width="160dp" 
 	    android:layout_height="wrap_content"
-	    android:text="@string/add_match" 
-	    android:onClick="showDatePickerDialog" />
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/set_date" 
+	    android:onClick="setDate" />
+   	
+   	<TextView
+   	    android:id="@+id/date_time_lbl"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_gravity="center_horizontal"
+   	    android:textSize="18sp"
+   	    android:textIsSelectable="true" />
+   	
+   	<Button 
+   	    android:id="@+id/set_time_btn"
+	    android:layout_width="160dp" 
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/set_time" 
+	    android:onClick="setTime" />
+   	
+   	<CheckBox
+   	    android:id="@+id/chkHome"
+   	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chk_home" />
+   	
+   	<Button
+        android:id="@+id/btnAddMatch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:text="@string/add_match" />
    	
    	<Button
             android:id="@+id/btnCancelAddMatch"

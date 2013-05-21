@@ -1,16 +1,33 @@
 package com.example.soccerman;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import library.UserFunctions;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 public class AddMatchActivity extends Activity
 {
 	private UserFunctions userFunctions;
-	private Button btnCancelAdd;
+	private EditText inputOpponent, inputVenue;
+	private Button btnAddMatch, btnCancelAdd;
+	private TextView dateTimeLabel;
+	private CheckBox checkHome;
+	@SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
+	private Calendar dateTime = Calendar.getInstance();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -25,12 +42,29 @@ public class AddMatchActivity extends Activity
         	Bundle extras = getIntent().getExtras();
     	    int team = extras.getInt("teamId");
     	    
+    	    inputOpponent = (EditText) findViewById(R.id.opponent);
+    	    inputVenue = (EditText) findViewById(R.id.venue);
+    	    checkHome = (CheckBox) findViewById(R.id.chkHome);
+    	    btnAddMatch = (Button) findViewById(R.id.btnAddMatch);
     	    btnCancelAdd = (Button) findViewById(R.id.btnCancelAddMatch);
+    	    dateTimeLabel = (TextView) findViewById(R.id.date_time_lbl);
     	    
-    	    System.out.println(team);
+    	    updateDateTimeLabel();
+    	    
+    	    btnAddMatch.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					String opponent = inputOpponent.getText().toString();
+					String venue = inputVenue.getText().toString();
+					boolean home = checkHome.isChecked();
+				}
+			});
     	    
     	    btnCancelAdd.setOnClickListener(new View.OnClickListener()
             {
+    	    	@Override
             	public void onClick(View view) {
             		Intent dashboard = new Intent(AddMatchActivity.this, MyTeamListActivity.class);
             		startActivity(dashboard);
@@ -46,5 +80,43 @@ public class AddMatchActivity extends Activity
             startActivity(login);
             finish();
         }
+	}
+	
+	public void setDate(View v)
+	{
+		new DatePickerDialog(AddMatchActivity.this, d, dateTime.get(Calendar.YEAR),dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH)).show();
+    }
+	
+	public void setTime(View v)
+	{
+		new TimePickerDialog(AddMatchActivity.this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show();
+    }
+	
+	DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener()
+	{
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+		{
+			dateTime.set(Calendar.YEAR, year);
+			dateTime.set(Calendar.MONTH, monthOfYear);
+			dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+			updateDateTimeLabel();
+		}
+	};
+	
+	TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener()
+	{
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+		{
+			dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+			dateTime.set(Calendar.MINUTE,minute);
+			updateDateTimeLabel();
+		}
+	};
+	
+	private void updateDateTimeLabel()
+	{
+		dateTimeLabel.setText(dateFormat.format(dateTime.getTime()));
 	}
 }

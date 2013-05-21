@@ -24,6 +24,9 @@
     <string name="venue">Venue</string>
     <string name="add_match">Add Match</string>
     <string name="view_matches">View Matches</string>
+    <string name="set_date">Set Game Date</string>
+    <string name="set_time">Set Game Time</string>
+    <string name="chk_home">Home game?</string>
     <string name="already_registered">Already registered? Login now</string>
     <string name="register_now">I don\'t have an account. Register now</string>
     <string name="back_to_menu">Back to menu</string>
