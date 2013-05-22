@@ -72,6 +72,7 @@ public class MyTeamListActivity extends ListActivity
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.team_list_menu, menu);
+	    //menu.getItem(0).setEnabled(false);
 	}
 	
 	@Override

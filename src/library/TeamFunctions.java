@@ -23,7 +23,7 @@ public class TeamFunctions
     private static String PLAYERS_TEAM_TAG = "players_teams";
      
     // constructor
-    public  TeamFunctions()
+    public TeamFunctions()
     {
         jsonParser = new JSONParser();
     }

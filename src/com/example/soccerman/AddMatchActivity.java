@@ -3,6 +3,10 @@ package com.example.soccerman;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import library.MatchFunctions;
 import library.UserFunctions;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,17 +21,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class AddMatchActivity extends Activity
 {
 	private UserFunctions userFunctions;
 	private EditText inputOpponent, inputVenue;
 	private Button btnAddMatch, btnCancelAdd;
-	private TextView dateTimeLabel;
+	private TextView dateTimeLabel, addMatchErrorMsg;
 	private CheckBox checkHome;
+	private Calendar dateTime = Calendar.getInstance();
+	
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
-	private Calendar dateTime = Calendar.getInstance();
+	
+	// JSON response names
+	private static String KEY_SUCCESS = "success";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -40,7 +49,7 @@ public class AddMatchActivity extends Activity
         	setContentView(R.layout.add_match);
         	
         	Bundle extras = getIntent().getExtras();
-    	    int team = extras.getInt("teamId");
+    	    final int team = extras.getInt("teamId");
     	    
     	    inputOpponent = (EditText) findViewById(R.id.opponent);
     	    inputVenue = (EditText) findViewById(R.id.venue);
@@ -48,6 +57,7 @@ public class AddMatchActivity extends Activity
     	    btnAddMatch = (Button) findViewById(R.id.btnAddMatch);
     	    btnCancelAdd = (Button) findViewById(R.id.btnCancelAddMatch);
     	    dateTimeLabel = (TextView) findViewById(R.id.date_time_lbl);
+    	    addMatchErrorMsg = (TextView) findViewById(R.id.add_match_error);
     	    
     	    updateDateTimeLabel();
     	    
@@ -59,6 +69,36 @@ public class AddMatchActivity extends Activity
 					String opponent = inputOpponent.getText().toString();
 					String venue = inputVenue.getText().toString();
 					boolean home = checkHome.isChecked();
+					long time = dateTime.getTimeInMillis();
+					
+					MatchFunctions matchFunctions = new MatchFunctions();
+					JSONObject json = matchFunctions.addMatch(team, opponent, venue, time);
+					
+					try
+					{
+						if (json.getString(KEY_SUCCESS) != null) 
+						{
+							String res = json.getString(KEY_SUCCESS); 
+                			if(Integer.parseInt(res) == 1)
+                			{
+                				addMatchErrorMsg.setText("");
+                				
+                				Toast.makeText(AddMatchActivity.this, "Match added successfully", Toast.LENGTH_LONG).show();
+                				
+                				Intent dashboard = new Intent(AddMatchActivity.this, MyTeamListActivity.class);
+                        		startActivity(dashboard);
+                        		finish();
+                			}
+                			else 
+	                		{
+	                			addMatchErrorMsg.setText("Error in form");
+	                		}
+						}
+					}
+					catch (JSONException e) 
+                	{
+            			e.printStackTrace();
+            		}
 				}
 			});
     	    
