@@ -19,6 +19,7 @@ public class MatchFunctions
      
     private static String ADD_MATCH_TAG = "add_match";
     private static String TEAM_MATCHES = "get_matches";
+    private static String ADD_ATTENDANCE = "add_attendance";
     
     public MatchFunctions()
     {
@@ -48,7 +49,6 @@ public class MatchFunctions
     /**
      * function to get all matches for a team
      * @param team id
-	 * @throws JSONException 
      **/
 	public ArrayList<Match> getAllMatches(String team)
 	{
@@ -78,5 +78,24 @@ public class MatchFunctions
         {
         	return new ArrayList<Match>();
         }
+	}
+	
+	/**
+     * function to add match attendance for a player
+     * @param player id
+     * @param match id
+     * @param attendance response
+     **/
+	public JSONObject addAttendance(String player, int match, int attendance)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", ADD_ATTENDANCE));
+        params.add(new BasicNameValuePair("player", String.valueOf(player)));
+        params.add(new BasicNameValuePair("match", String.valueOf(match)));
+        params.add(new BasicNameValuePair("attend", String.valueOf(attendance)));
+        
+        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        
+        return json;
 	}
 }

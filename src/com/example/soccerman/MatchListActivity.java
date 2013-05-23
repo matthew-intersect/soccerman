@@ -2,13 +2,15 @@ package com.example.soccerman;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import library.MatchFunctions;
-import library.TeamFunctions;
 import library.UserFunctions;
 import models.Match;
 import adapters.MatchAdapter;
-import adapters.TeamAdapter;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 @SuppressLint("HandlerLeak")
@@ -29,8 +32,10 @@ public class MatchListActivity extends ListActivity
 	private ArrayList<Match> matches = new ArrayList<Match>();
 	private Runnable viewParts;
 	private MatchAdapter matchAdapter;
-	Button btnBack;
+	Button btnBack, btnYes, btnNo;
 	private int teamId;
+	
+	private static String KEY_SUCCESS = "success";
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -83,10 +88,77 @@ public class MatchListActivity extends ListActivity
 	@Override
 	public boolean onContextItemSelected(MenuItem item) 
 	{
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    switch (item.getItemId()) {
-	    case R.id.change_attendance:
-	    	//TODO: add in change attendance intent
+		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.change_attendance:
+			final Dialog dialog = new Dialog(MatchListActivity.this);
+			dialog.setTitle("Are you playing?");
+			dialog.setContentView(R.layout.change_attendance);
+			
+			final MatchFunctions matchFunctions = new MatchFunctions();
+			btnYes = (Button) dialog.findViewById(R.id.attend_yes);
+			btnNo = (Button) dialog.findViewById(R.id.attend_no);
+			final String currentUser = new UserFunctions().getLoggedInUserId(getApplicationContext());
+			
+			btnYes.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 1); // 1 for yes
+					try
+                	{
+                		if (json.getString(KEY_SUCCESS) != null) 
+                		{
+                			if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+                			{
+                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+            					dialog.dismiss();
+                			}
+                			else
+                			{
+                				Toast.makeText(MatchListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+            					dialog.dismiss();
+                			}
+                		}
+                	}
+					catch (JSONException e) 
+                	{
+            			e.printStackTrace();
+            		}
+				}
+			});
+			
+			btnNo.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 0); // 0 for no
+					try
+                	{
+                		if (json.getString(KEY_SUCCESS) != null) 
+                		{
+                			if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+                			{
+                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+            					dialog.dismiss();
+                			}
+                			else
+                			{
+                				Toast.makeText(MatchListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+            					dialog.dismiss();
+                			}
+                		}
+                	}
+					catch (JSONException e) 
+                	{
+            			e.printStackTrace();
+            		}
+				}
+			});
+			
+			dialog.show();
 	        return true;
 	    case R.id.view_attendance:
 	    	//TODO: view attendance intent
