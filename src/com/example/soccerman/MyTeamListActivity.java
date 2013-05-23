@@ -72,6 +72,7 @@ public class MyTeamListActivity extends ListActivity
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.team_list_menu, menu);
+	    //TODO: change menu contents based on role
 	    //menu.getItem(0).setEnabled(false);
 	}
 	
@@ -86,6 +87,9 @@ public class MyTeamListActivity extends ListActivity
 	        startActivity(addMatch);
 	        return true;
 	    case R.id.view_matches:
+	    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
+	    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
+	    	startActivity(viewMatches);
 	    	return true;
 	    }
 	    return false;

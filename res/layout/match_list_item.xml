@@ -5,7 +5,7 @@
     android:padding="10dip">
     
     <TextView
-		android:id="@+id/list_team_name"
+		android:id="@+id/list_match_opponent"
 		android:layout_width="wrap_content"
 		android:layout_height="20dip"
 		android:layout_alignParentTop="true"
@@ -17,23 +17,22 @@
     />
     
     <TextView
-		android:id="@+id/managed_by"
+		android:id="@+id/list_match_venue"
 		android:layout_width="wrap_content"
 		android:layout_height="20dip"
 		android:layout_alignParentLeft="true"
-		android:layout_below="@id/list_team_name"
+		android:layout_below="@id/list_match_opponent"
 		android:gravity="center_vertical"
-		android:text="@string/manager"
 		android:textIsSelectable="false"
 	 	/>
    
    	<TextView
-		android:id="@+id/list_team_manager"
+		android:id="@+id/list_match_time"
 		android:layout_width="fill_parent"
 		android:layout_height="20dip"
 		android:layout_alignParentRight="true"
-		android:layout_below="@id/list_team_name"
-		android:layout_toRightOf="@id/managed_by"
+		android:layout_below="@id/list_match_opponent"
+		android:layout_toRightOf="@id/list_match_venue"
 		android:textStyle="bold"
 		android:gravity="center_vertical"
 		android:textIsSelectable="false"

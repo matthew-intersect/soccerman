@@ -17,13 +17,11 @@ public class Match
 	{
 	}
 	
-	public Match(int id, int teamId, String opponent, MatchState state, int round, String venue, long time)
+	public Match(int id, int teamId, String opponent, String venue, long time)
 	{
 		this.id =id;
 		this.teamId = teamId;
 		this.opponent = opponent;
-		this.matchState = state;
-		this.round = round;
 		this.venue = venue;
 		this.time = new GregorianCalendar();
 		this.time.setTimeInMillis(time);

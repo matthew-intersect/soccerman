@@ -25,17 +25,14 @@
             </intent-filter>
         </activity>
          
-        <!--  Login Activity -->
         <activity
             android:label="Login Account"
             android:name=".LoginActivity" />
  
-        <!--  Register Activity -->
         <activity
             android:label="Register New Account"
             android:name=".RegisterActivity" />
         
-        <!--  Add Team Activity -->
         <activity
             android:label="Add Team"
             android:name=".AddTeamActivity" />
@@ -51,6 +48,10 @@
         <activity
             android:label="Add Match"
             android:name=".AddMatchActivity" />
+        
+        <activity
+            android:label="View Matches"
+            android:name=".MatchListActivity" />
         
     </application>
  
