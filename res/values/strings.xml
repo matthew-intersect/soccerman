@@ -23,7 +23,7 @@
     <string name="no_teams">No teams to display</string>
     <string name="no_matches">No matches to display</string>
     <string name="no_attendances">No players in team</string>
-    <string name="manager">Manager: </string>
+    <string name="manager">"Manager: "</string>
     <string name="opponent">Opponent</string>
     <string name="venue">Venue</string>
     <string name="add_match">Add Match</string>
@@ -31,6 +31,7 @@
     <string name="set_date">Set Game Date</string>
     <string name="set_time">Set Game Time</string>
     <string name="chk_home">Home game?</string>
+    <string name="chk_player_manager">Player Manager?</string>
     <string name="change_attendance">Change Attendance</string>
     <string name="view_attendance">View Attendance</string>
     <string name="already_registered">Already registered? Login now</string>

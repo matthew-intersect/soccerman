@@ -48,7 +48,7 @@ public class MatchAdapter extends ArrayAdapter<Match>
 			}
 			if(match_venue != null)
 			{
-				match_venue.setText(match.getVenue());
+				match_venue.setText(match.getVenue() + " - ");
 			}
 			if(match_time != null)
 			{

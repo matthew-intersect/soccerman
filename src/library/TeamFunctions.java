@@ -21,6 +21,7 @@ public class TeamFunctions
     private static String ADD_TEAM_TAG = "add_team";
     private static String JOIN_TEAM_TAG = "join_team";
     private static String PLAYERS_TEAM_TAG = "players_teams";
+    private static String GET_MANAGER_TAG = "get_team_manager";
      
     // constructor
     public TeamFunctions()
@@ -33,12 +34,13 @@ public class TeamFunctions
      * @param name
      * @param user created by
      **/
-    public JSONObject addTeam(String name, String created_by)
+    public JSONObject addTeam(String name, String created_by, int playerManager)
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", ADD_TEAM_TAG));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("created_by", created_by));
+        params.add(new BasicNameValuePair("player_manager", String.valueOf(playerManager)));
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
 
         return json;
@@ -95,4 +97,17 @@ public class TeamFunctions
         }
 	}
     
+	/**
+     * function to get manager information for a team
+     * @param team id
+     **/
+	public JSONObject getTeamManager(int team)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", GET_MANAGER_TAG));
+        params.add(new BasicNameValuePair("team", String.valueOf(team)));
+        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+
+        return json;
+	}
 }

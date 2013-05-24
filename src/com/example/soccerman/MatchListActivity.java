@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import library.MatchFunctions;
+import library.TeamFunctions;
 import library.UserFunctions;
 import models.Match;
 import adapters.MatchAdapter;
@@ -44,7 +45,7 @@ public class MatchListActivity extends ListActivity
 		
 		Bundle extras = getIntent().getExtras();
 	    teamId = extras.getInt("teamId");
-		
+	    
 		btnBack = (Button) findViewById(R.id.back_to_teams);
 		matchAdapter = new MatchAdapter(this, R.layout.match_list_item, matches);
 		setListAdapter(matchAdapter);
@@ -82,7 +83,26 @@ public class MatchListActivity extends ListActivity
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.match_list_menu, menu);
-	    //menu.getItem(0).setEnabled(false);
+	    
+	    TeamFunctions teamFunctions = new TeamFunctions();
+	    UserFunctions userFunctions = new UserFunctions();
+	    JSONObject json = teamFunctions.getTeamManager(teamId);
+	    
+	    try
+		{
+			int manager = json.getInt("manager");
+			if(manager == Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
+			{
+				if(json.getInt("player_manager") == 0)
+				{
+					menu.getItem(0).setVisible(false);
+				}
+			}
+		} 
+	    catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

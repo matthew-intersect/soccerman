@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class AddTeamActivity extends Activity
 	UserFunctions userFunctions;
 	Button btnAddTeam, btnCancel;
 	EditText inputTeamName;
+	CheckBox chkPlayerManager;
 	TextView addTeamErrorMsg;
 	
 	private static String TEAM_ADD_MESSAGE = "Your team has been successfully created. For players to join this team, get them to use the following code: ";
@@ -39,6 +41,7 @@ public class AddTeamActivity extends Activity
         	setContentView(R.layout.add_team);
         	
         	inputTeamName = (EditText) findViewById(R.id.teamName);
+        	chkPlayerManager = (CheckBox) findViewById(R.id.chkPlayerManager);
         	btnAddTeam = (Button) findViewById(R.id.btnAddTeam);
             btnCancel = (Button) findViewById(R.id.btnCancelAddTeam);
             addTeamErrorMsg = (TextView) findViewById(R.id.add_team_error);
@@ -48,10 +51,11 @@ public class AddTeamActivity extends Activity
             	public void onClick(View view) 
             	{
             		String name = inputTeamName.getText().toString();
+            		int playerManager = (chkPlayerManager.isChecked()) ? 1 : 0;
                 	String created_by = userFunctions.getLoggedInUserId(getApplicationContext());
                 	
                 	TeamFunctions teamFunctions = new TeamFunctions();
-                	JSONObject json = teamFunctions.addTeam(name, created_by);
+                	JSONObject json = teamFunctions.addTeam(name, created_by, playerManager);
             		
                 	// check for add team response
                 	try

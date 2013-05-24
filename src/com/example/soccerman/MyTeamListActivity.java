@@ -2,6 +2,9 @@ package com.example.soccerman;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import library.TeamFunctions;
 import library.UserFunctions;
 import models.Team;
@@ -72,8 +75,27 @@ public class MyTeamListActivity extends ListActivity
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.team_list_menu, menu);
+	    
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+        int position = info.position;
+        
 	    //TODO: change menu contents based on role
-	    //menu.getItem(0).setEnabled(false);
+	    TeamFunctions teamFunctions = new TeamFunctions();
+	    UserFunctions userFunctions = new UserFunctions();
+	    JSONObject json = teamFunctions.getTeamManager(teams.get(position).getId());
+	    
+	    try
+		{
+			int manager = json.getInt("manager");
+			if(manager != Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
+			{
+				menu.getItem(0).setVisible(false); // hide add match menu option for players
+			}
+		} 
+	    catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
