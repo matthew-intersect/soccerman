@@ -22,6 +22,7 @@
     <string name="join">Join</string>
     <string name="no_teams">No teams to display</string>
     <string name="no_matches">No matches to display</string>
+    <string name="no_attendances">No players in team</string>
     <string name="manager">Manager: </string>
     <string name="opponent">Opponent</string>
     <string name="venue">Venue</string>
@@ -36,5 +37,6 @@
     <string name="register_now">I don\'t have an account. Register now</string>
     <string name="back_to_menu">Back to menu</string>
     <string name="back_to_teams">Back to team list</string>
+    <string name="back_to_matches">Back to match list</string>
 
 </resources>

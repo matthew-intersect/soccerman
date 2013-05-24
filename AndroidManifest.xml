@@ -53,6 +53,10 @@
             android:label="View Matches"
             android:name=".MatchListActivity" />
         
+        <activity
+            android:label="View Match Attendance"
+            android:name=".ViewAttendanceListActivity" />
+        
     </application>
  
 </manifest>

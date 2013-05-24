@@ -161,7 +161,11 @@ public class MatchListActivity extends ListActivity
 			dialog.show();
 	        return true;
 	    case R.id.view_attendance:
-	    	//TODO: view attendance intent
+	    	Intent matchList = new Intent(MatchListActivity.this, ViewAttendanceListActivity.class);
+	    	matchList.putExtra("matchId", matches.get(info.position).getId());
+	    	matchList.putExtra("teamId", teamId);
+	    	startActivity(matchList);
+	    	finish();
 	    	return true;
 	    }
 	    return false;

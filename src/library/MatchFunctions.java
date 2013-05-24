@@ -3,7 +3,9 @@ package library;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Attendance;
 import models.Match;
+import models.PlayerAttendance;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -20,6 +22,7 @@ public class MatchFunctions
     private static String ADD_MATCH_TAG = "add_match";
     private static String TEAM_MATCHES = "get_matches";
     private static String ADD_ATTENDANCE = "add_attendance";
+    private static String GET_ATTENDANCE = "get_attendance";
     
     public MatchFunctions()
     {
@@ -97,5 +100,53 @@ public class MatchFunctions
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
         
         return json;
+	}
+
+	/**
+     * function to get all player attendances for a match
+     * @param match id
+     **/
+	public ArrayList<PlayerAttendance> getMatchAttendance(String match)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", GET_ATTENDANCE));
+        params.add(new BasicNameValuePair("match", match));
+        try
+        {
+        	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        	if(Integer.parseInt(json.getString("success")) == 1)
+        	{
+	        	ArrayList<PlayerAttendance> playerAttendances = new ArrayList<PlayerAttendance>();
+	        	JSONArray array = json.getJSONArray("attendances");
+	        	
+	        	Attendance attendance = null;
+	        	for(int i=0;i<array.length();i++)
+	        	{
+	        		JSONObject playerAttendance = array.getJSONObject(i);
+	        		int attendValue = playerAttendance.getInt("attendance");
+	        		switch(attendValue)
+	        		{
+		        		case 1: 
+		        			attendance = Attendance.YES;
+		        			break;
+		        		case 0: 
+		        			attendance = Attendance.NO;
+		        			break;
+		        		case -1: 
+		        			attendance = Attendance.NOT_RESPONDED;
+		        			break;
+	        		}
+	        		playerAttendances.add(new PlayerAttendance(playerAttendance.getInt("player_id"), playerAttendance.getString("player_name"), attendance));
+	        	}
+	        	return playerAttendances;
+        	}
+        	else {
+        		return new ArrayList<PlayerAttendance>();
+        	}
+        }
+        catch (JSONException e) 
+        {
+        	return new ArrayList<PlayerAttendance>();
+        }
 	}
 }
