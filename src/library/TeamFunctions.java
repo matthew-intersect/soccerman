@@ -83,7 +83,8 @@ public class TeamFunctions
 	        	for(int i=0;i<array.length();i++)
 	        	{
 	        		JSONObject team = array.getJSONObject(i);
-	        		teams.add(new Team(team.getString("name"), team.getInt("id"), team.getString("manager")));
+	        		teams.add(new Team(team.getString("name"), team.getInt("id"), team.getString("code"),
+	        				team.getString("manager")));
 	        	}
 	        	return teams;
         	}

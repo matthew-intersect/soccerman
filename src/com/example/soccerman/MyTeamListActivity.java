@@ -11,6 +11,7 @@ import models.Team;
 
 import adapters.TeamAdapter;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 @SuppressLint("HandlerLeak")
 public class MyTeamListActivity extends ListActivity
@@ -32,6 +34,8 @@ public class MyTeamListActivity extends ListActivity
 	private Runnable viewParts;
 	private TeamAdapter teamAdapter;
 	Button btnBack;
+	
+	private static String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -79,7 +83,6 @@ public class MyTeamListActivity extends ListActivity
 	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         int position = info.position;
         
-	    //TODO: change menu contents based on role
 	    TeamFunctions teamFunctions = new TeamFunctions();
 	    UserFunctions userFunctions = new UserFunctions();
 	    JSONObject json = teamFunctions.getTeamManager(teams.get(position).getId());
@@ -90,6 +93,7 @@ public class MyTeamListActivity extends ListActivity
 			if(manager != Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
 			{
 				menu.getItem(0).setVisible(false); // hide add match menu option for players
+				menu.getItem(2).setVisible(false); // hide view team code option for players
 			}
 		} 
 	    catch (JSONException e)
@@ -112,6 +116,27 @@ public class MyTeamListActivity extends ListActivity
 	    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
 	    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
 	    	startActivity(viewMatches);
+	    	return true;
+	    case R.id.view_team_code:
+	    	final Dialog viewTeamCode = new Dialog(MyTeamListActivity.this);
+	    	viewTeamCode.setTitle(teams.get(info.position).getName() + " Team Code");
+			viewTeamCode.setContentView(R.layout.view_team_code);
+			
+			TextView teamCode = (TextView) viewTeamCode.findViewById(R.id.view_team_code);
+			TextView teamCodeMessage = (TextView) viewTeamCode.findViewById(R.id.view_team_code_message);
+			Button btnOk = (Button) viewTeamCode.findViewById(R.id.view_team_code_ok);
+			teamCode.setText(teams.get(info.position).getCode());
+			teamCodeMessage.setText(TEAM_CODE_MESSAGE);
+			
+			btnOk.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					viewTeamCode.dismiss();					
+				}
+			});
+	    	viewTeamCode.show();
 	    	return true;
 	    }
 	    return false;

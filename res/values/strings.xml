@@ -28,6 +28,7 @@
     <string name="venue">Venue</string>
     <string name="add_match">Add Match</string>
     <string name="view_matches">View Matches</string>
+    <string name="view_team_code">View Team Code</string>
     <string name="set_date">Set Game Date</string>
     <string name="set_time">Set Game Time</string>
     <string name="chk_home">Home game?</string>
