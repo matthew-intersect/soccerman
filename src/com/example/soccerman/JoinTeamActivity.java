@@ -24,6 +24,8 @@ public class JoinTeamActivity extends Activity
 	// JSON response names
 	private static String KEY_SUCCESS = "success";
 	
+	private static String JOIN_TEAM_ERROR = "Team with entered code doesn't exist";
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -43,8 +45,14 @@ public class JoinTeamActivity extends Activity
         	{
         		public void onClick(View view) 
         		{
-        			String code = inputTeamCode.getText().toString();
+        			String code = inputTeamCode.getText().toString().trim();
         			String player = userFunctions.getLoggedInUserId(getApplicationContext());
+        			
+        			if(code.equals(""))
+        			{
+        				joinTeamErrorMsg.setText(JOIN_TEAM_ERROR);
+        				return;
+        			}
         			
         			TeamFunctions teamFunctions = new TeamFunctions();
                 	JSONObject json = teamFunctions.addPlayer(code, player);
@@ -67,7 +75,7 @@ public class JoinTeamActivity extends Activity
                 			}
                 			else
                 			{
-                				joinTeamErrorMsg.setText("Team with entered code doesn't exist");
+                				joinTeamErrorMsg.setText(JOIN_TEAM_ERROR);
                 			}
                 		}
                 	}

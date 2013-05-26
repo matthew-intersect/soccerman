@@ -17,9 +17,7 @@ import android.widget.TextView;
 public class RegisterActivity extends Activity {
     Button btnRegister;
     Button btnLinkToLogin;
-    EditText inputFullName;
-    EditText inputEmail;
-    EditText inputPassword;
+    EditText inputFullName, inputEmail, inputPassword, inputConfirmPassword;
     TextView registerErrorMsg;
      
     // JSON Response node names
@@ -39,6 +37,7 @@ public class RegisterActivity extends Activity {
         inputFullName = (EditText) findViewById(R.id.registerName);
         inputEmail = (EditText) findViewById(R.id.registerEmail);
         inputPassword = (EditText) findViewById(R.id.registerPassword);
+        inputConfirmPassword = (EditText) findViewById(R.id.registerConfirmPassword);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         registerErrorMsg = (TextView) findViewById(R.id.register_error);
@@ -49,22 +48,24 @@ public class RegisterActivity extends Activity {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String confirmPassword = inputConfirmPassword.getText().toString().trim();
                 
                 StringBuilder errors = new StringBuilder();
-                if(name.equals(""))
+                if(name.equals("") || email.equals("") || password.equals("") || confirmPassword.equals(""))
                 {
-                	errors.append("Name cannot be blank\n");
-                	inputFullName.setText("");
+                	errors.append("Name, email and password cannot be blank\n");
+                	if(name.equals(""))
+                		inputFullName.setText("");
+                	if(email.equals(""))
+                		inputEmail.setText("");
+                	if(password.equals(""))
+                		inputPassword.setText("");
+                	if(confirmPassword.equals(""))
+                		inputConfirmPassword.setText("");
                 }
-                if(email.equals(""))
+                if(!password.equals(confirmPassword))
                 {
-                	errors.append("Email cannot be blank\n");
-                	inputEmail.setText("");
-                }
-                if(password.equals(""))
-                {
-                	errors.append("Password cannot be blank\n");
-                	inputPassword.setText("");
+                	errors.append("Passwords don't match\n");
                 }
                 
                 if(errors.toString() != "")
@@ -104,7 +105,7 @@ public class RegisterActivity extends Activity {
                         		registerErrorMsg.setText("User with given email already exists");
                         		return;
                         	}
-                            registerErrorMsg.setText("Error occurred in registration. Try again later");
+                        	registerErrorMsg.setText("Error occurred in registration. Try again later");
                         }
                     }
                 } catch (JSONException e) {

@@ -10,6 +10,7 @@
     <string name="fullname">Full Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="add_team">Add Team</string>
     <string name="team_name">Team Name</string>
     <string name="create">Create</string>

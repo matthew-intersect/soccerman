@@ -47,8 +47,15 @@ public class LoginActivity extends Activity
         {
  
             public void onClick(View view) {
-                String email = inputEmail.getText().toString();
-                String password = inputPassword.getText().toString();
+                String email = inputEmail.getText().toString().trim();
+                String password = inputPassword.getText().toString().trim();
+
+                if(email.equals("") || password.equals(""))
+                {
+                	loginErrorMsg.setText("Incorrect username/password");
+                	return;
+                }
+                
                 UserFunctions userFunction = new UserFunctions();
                 JSONObject json = userFunction.loginUser(email, password);
  

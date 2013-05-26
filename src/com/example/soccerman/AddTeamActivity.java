@@ -50,9 +50,15 @@ public class AddTeamActivity extends Activity
             {
             	public void onClick(View view) 
             	{
-            		String name = inputTeamName.getText().toString();
+            		String name = inputTeamName.getText().toString().trim();
             		int playerManager = (chkPlayerManager.isChecked()) ? 1 : 0;
                 	String created_by = userFunctions.getLoggedInUserId(getApplicationContext());
+                	
+                	if(name.equals(""))
+                	{
+                		addTeamErrorMsg.setText("Team name can't be blank");
+                		return;
+                	}
                 	
                 	TeamFunctions teamFunctions = new TeamFunctions();
                 	JSONObject json = teamFunctions.addTeam(name, created_by, playerManager);
@@ -96,7 +102,7 @@ public class AddTeamActivity extends Activity
 	                		}
 	                		else 
 	                		{
-	                			addTeamErrorMsg.setText("Team name aleady taken/can't be blank");
+	                			addTeamErrorMsg.setText("Team name aleady taken");
 	                		}
                 		}
                 	} 

@@ -59,6 +59,8 @@ public class AddMatchActivity extends Activity
     	    dateTimeLabel = (TextView) findViewById(R.id.date_time_lbl);
     	    addMatchErrorMsg = (TextView) findViewById(R.id.add_match_error);
     	    
+    	    dateTime.set(Calendar.HOUR_OF_DAY, 12);
+			dateTime.set(Calendar.MINUTE, 0);
     	    updateDateTimeLabel();
     	    
     	    btnAddMatch.setOnClickListener(new View.OnClickListener()
@@ -66,10 +68,20 @@ public class AddMatchActivity extends Activity
 				@Override
 				public void onClick(View v)
 				{
-					String opponent = inputOpponent.getText().toString();
-					String venue = inputVenue.getText().toString();
+					String opponent = inputOpponent.getText().toString().trim();
+					String venue = inputVenue.getText().toString().trim();
 					boolean home = checkHome.isChecked();
 					long time = dateTime.getTimeInMillis();
+					
+					if(opponent.equals("") || venue.equals(""))
+					{
+						addMatchErrorMsg.setText("Opponent and venue can't be blank");
+						if(opponent.equals(""))
+							inputOpponent.setText("");
+						if(venue.equals(""))
+							inputVenue.setText("");
+						return;
+					}
 					
 					MatchFunctions matchFunctions = new MatchFunctions();
 					JSONObject json = matchFunctions.addMatch(team, opponent, venue, time);
@@ -91,7 +103,7 @@ public class AddMatchActivity extends Activity
                 			}
                 			else 
 	                		{
-	                			addMatchErrorMsg.setText("Error in form");
+	                			addMatchErrorMsg.setText("Error adding match. PLease try again");
 	                		}
 						}
 					}
