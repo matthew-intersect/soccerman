@@ -6,6 +6,7 @@ public class Team
 	private String name;
 	private String code;
 	private String manager;
+	private String homeGround;
 	
 	public Team()
 	{
@@ -18,12 +19,13 @@ public class Team
 		this.manager = manager;
 	}
 	
-	public Team(String name, int id, String code, String manager)
+	public Team(String name, int id, String code, String manager, String homeGround)
 	{
 		this.id = id;
 		this.name = name;
 		this.code = code;
 		this.manager = manager;
+		this.homeGround = homeGround;
 	}
 
 	public int getId()
@@ -64,5 +66,15 @@ public class Team
 	public void setManager(String manager)
 	{
 		this.manager = manager;
+	}
+	
+	public String getHomeGround()
+	{
+		return homeGround;
+	}
+
+	public void setHomeGround(String homeGround)
+	{
+		this.homeGround = homeGround;
 	}
 }

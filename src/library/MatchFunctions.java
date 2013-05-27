@@ -36,13 +36,14 @@ public class MatchFunctions
      * @param venue
      * @param game date and time
      **/
-    public JSONObject addMatch(int team, String opponent, String venue, long time)
+    public JSONObject addMatch(int team, String opponent, String venue, String home, long time)
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", ADD_MATCH_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
         params.add(new BasicNameValuePair("opponent", opponent));
         params.add(new BasicNameValuePair("venue", venue));
+        params.add(new BasicNameValuePair("home", home));
         params.add(new BasicNameValuePair("time", String.valueOf(time)));
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
         

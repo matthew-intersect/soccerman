@@ -19,7 +19,7 @@ public class AddTeamActivity extends Activity
 {
 	UserFunctions userFunctions;
 	Button btnAddTeam, btnCancel;
-	EditText inputTeamName;
+	EditText inputTeamName, inputHomeGround;
 	CheckBox chkPlayerManager;
 	TextView addTeamErrorMsg;
 	
@@ -41,6 +41,7 @@ public class AddTeamActivity extends Activity
         	setContentView(R.layout.add_team);
         	
         	inputTeamName = (EditText) findViewById(R.id.teamName);
+        	inputHomeGround = (EditText) findViewById(R.id.teamHomeGround);
         	chkPlayerManager = (CheckBox) findViewById(R.id.chkPlayerManager);
         	btnAddTeam = (Button) findViewById(R.id.btnAddTeam);
             btnCancel = (Button) findViewById(R.id.btnCancelAddTeam);
@@ -51,6 +52,7 @@ public class AddTeamActivity extends Activity
             	public void onClick(View view) 
             	{
             		String name = inputTeamName.getText().toString().trim();
+            		String homeGround = inputHomeGround.getText().toString().trim();
             		int playerManager = (chkPlayerManager.isChecked()) ? 1 : 0;
                 	String created_by = userFunctions.getLoggedInUserId(getApplicationContext());
                 	
@@ -61,7 +63,7 @@ public class AddTeamActivity extends Activity
                 	}
                 	
                 	TeamFunctions teamFunctions = new TeamFunctions();
-                	JSONObject json = teamFunctions.addTeam(name, created_by, playerManager);
+                	JSONObject json = teamFunctions.addTeam(name, created_by, playerManager, homeGround);
             		
                 	// check for add team response
                 	try

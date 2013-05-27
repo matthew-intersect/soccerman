@@ -110,11 +110,13 @@ public class MyTeamListActivity extends ListActivity
 	    case R.id.add_match:
 	        Intent addMatch = new Intent(MyTeamListActivity.this, AddMatchActivity.class);
 	        addMatch.putExtra("teamId", teams.get(info.position).getId());
+	        addMatch.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
 	        startActivity(addMatch);
 	        return true;
 	    case R.id.view_matches:
 	    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
 	    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
+	    	viewMatches.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
 	    	startActivity(viewMatches);
 	    	return true;
 	    case R.id.view_team_code:

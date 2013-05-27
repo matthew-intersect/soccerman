@@ -23,6 +23,7 @@ public class ViewAttendanceListActivity extends ListActivity
 	private Runnable viewParts;
 	private PlayerAttendanceAdapter playerAttendanceAdapter;
 	private Button btnBack;
+	private String teamHomeGround;
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -32,6 +33,7 @@ public class ViewAttendanceListActivity extends ListActivity
 		Bundle extras = getIntent().getExtras();
 	    matchId = extras.getInt("matchId");
 	    teamId = extras.getInt("teamId");
+	    teamHomeGround = extras.getString("teamHomeGrond");
 		
 		btnBack = (Button) findViewById(R.id.back_to_matches);
 		playerAttendanceAdapter = new PlayerAttendanceAdapter(this, R.layout.player_attendance_list_item, playerAttendances);
@@ -43,6 +45,7 @@ public class ViewAttendanceListActivity extends ListActivity
 			{
 				Intent matches = new Intent(ViewAttendanceListActivity.this, MatchListActivity.class);
 				matches.putExtra("teamId", teamId);
+				matches.putExtra("teamHomeGround", teamHomeGround);
 				startActivity(matches);
 				finish();
 			}

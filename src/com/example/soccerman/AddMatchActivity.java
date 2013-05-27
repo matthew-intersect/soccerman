@@ -31,6 +31,7 @@ public class AddMatchActivity extends Activity
 	private TextView dateTimeLabel, addMatchErrorMsg;
 	private CheckBox checkHome;
 	private Calendar dateTime = Calendar.getInstance();
+	private String teamHomeGround;
 	
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
@@ -50,10 +51,11 @@ public class AddMatchActivity extends Activity
         	
         	Bundle extras = getIntent().getExtras();
     	    final int team = extras.getInt("teamId");
+    	    teamHomeGround = extras.getString("teamHomeGround");
     	    
     	    inputOpponent = (EditText) findViewById(R.id.opponent);
-    	    inputVenue = (EditText) findViewById(R.id.venue);
     	    checkHome = (CheckBox) findViewById(R.id.chkHome);
+    	    inputVenue = (EditText) findViewById(R.id.venue);
     	    btnAddMatch = (Button) findViewById(R.id.btnAddMatch);
     	    btnCancelAdd = (Button) findViewById(R.id.btnCancelAddMatch);
     	    dateTimeLabel = (TextView) findViewById(R.id.date_time_lbl);
@@ -63,6 +65,18 @@ public class AddMatchActivity extends Activity
 			dateTime.set(Calendar.MINUTE, 0);
     	    updateDateTimeLabel();
     	    
+    	    checkHome.setOnClickListener(new View.OnClickListener()
+    	    {
+				@Override
+				public void onClick(View v)
+				{
+					if(checkHome.isChecked())
+					{
+						inputVenue.setText(teamHomeGround);
+					}
+				}
+    	    });
+    	    
     	    btnAddMatch.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -71,6 +85,7 @@ public class AddMatchActivity extends Activity
 					String opponent = inputOpponent.getText().toString().trim();
 					String venue = inputVenue.getText().toString().trim();
 					boolean home = checkHome.isChecked();
+					String homeAway = (home) ? "home" : "away";
 					long time = dateTime.getTimeInMillis();
 					
 					if(opponent.equals("") || venue.equals(""))
@@ -84,7 +99,7 @@ public class AddMatchActivity extends Activity
 					}
 					
 					MatchFunctions matchFunctions = new MatchFunctions();
-					JSONObject json = matchFunctions.addMatch(team, opponent, venue, time);
+					JSONObject json = matchFunctions.addMatch(team, opponent, venue, homeAway, time);
 					
 					try
 					{

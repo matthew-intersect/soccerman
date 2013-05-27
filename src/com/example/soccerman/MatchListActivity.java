@@ -35,6 +35,7 @@ public class MatchListActivity extends ListActivity
 	private MatchAdapter matchAdapter;
 	Button btnBack, btnYes, btnNo;
 	private int teamId;
+	private String teamHomeGround;
 	
 	private static String KEY_SUCCESS = "success";
 	
@@ -45,6 +46,7 @@ public class MatchListActivity extends ListActivity
 		
 		Bundle extras = getIntent().getExtras();
 	    teamId = extras.getInt("teamId");
+	    teamHomeGround = extras.getString("teamHomeGround");
 	    
 		btnBack = (Button) findViewById(R.id.back_to_teams);
 		matchAdapter = new MatchAdapter(this, R.layout.match_list_item, matches);
@@ -184,6 +186,7 @@ public class MatchListActivity extends ListActivity
 	    	Intent matchList = new Intent(MatchListActivity.this, ViewAttendanceListActivity.class);
 	    	matchList.putExtra("matchId", matches.get(info.position).getId());
 	    	matchList.putExtra("teamId", teamId);
+	    	matchList.putExtra("teamHomeGround", teamHomeGround);
 	    	startActivity(matchList);
 	    	finish();
 	    	return true;

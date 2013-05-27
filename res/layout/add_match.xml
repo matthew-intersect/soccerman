@@ -20,6 +20,12 @@
    	    android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
    	
+   	<CheckBox
+   	    android:id="@+id/chkHome"
+   	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chk_home" />
+   	
    	<TextView 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -57,12 +63,6 @@
 	    android:text="@string/set_time" 
 	    android:onClick="setTime" />
    	
-   	<CheckBox
-   	    android:id="@+id/chkHome"
-   	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/chk_home" />
-   	
    	<TextView android:id="@+id/add_match_error"
         android:textIsSelectable="true"
         android:layout_width="fill_parent"
@@ -79,14 +79,13 @@
         android:text="@string/add_match" />
    	
    	<Button
-            android:id="@+id/btnCancelAddMatch"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:background="@null"
-            android:text="@string/cancel"
-            android:textColor="#21dbd4"
-            android:textStyle="bold" />
-   	
+        android:id="@+id/btnCancelAddMatch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="@null"
+        android:text="@string/cancel"
+        android:textColor="#21dbd4"
+        android:textStyle="bold" />
     
 </LinearLayout>

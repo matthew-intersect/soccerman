@@ -34,13 +34,14 @@ public class TeamFunctions
      * @param name
      * @param user created by
      **/
-    public JSONObject addTeam(String name, String created_by, int playerManager)
+    public JSONObject addTeam(String name, String created_by, int playerManager, String homeGround)
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", ADD_TEAM_TAG));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("created_by", created_by));
         params.add(new BasicNameValuePair("player_manager", String.valueOf(playerManager)));
+        params.add(new BasicNameValuePair("home_ground", homeGround));
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
 
         return json;
@@ -84,7 +85,7 @@ public class TeamFunctions
 	        	{
 	        		JSONObject team = array.getJSONObject(i);
 	        		teams.add(new Team(team.getString("name"), team.getInt("id"), team.getString("code"),
-	        				team.getString("manager")));
+	        				team.getString("manager"), team.getString("home_ground")));
 	        	}
 	        	return teams;
         	}
