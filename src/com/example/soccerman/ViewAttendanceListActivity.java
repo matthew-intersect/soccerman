@@ -6,9 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import library.MatchFunctions;
-import library.TeamFunctions;
-import library.UserFunctions;
 import models.PlayerAttendance;
+import models.TeamRole;
 
 import adapters.PlayerAttendanceAdapter;
 import android.annotation.SuppressLint;
@@ -18,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +37,7 @@ public class ViewAttendanceListActivity extends ListActivity
 	private PlayerAttendanceAdapter playerAttendanceAdapter;
 	private Button btnBack;
 	private String teamHomeGround;
+	private TeamRole teamRole;
 	
 	private static String KEY_SUCCESS = "success";
 	
@@ -49,6 +50,7 @@ public class ViewAttendanceListActivity extends ListActivity
 	    matchId = extras.getInt("matchId");
 	    teamId = extras.getInt("teamId");
 	    teamHomeGround = extras.getString("teamHomeGrond");
+	    teamRole = extras.getParcelable("teamRole");
 		
 		btnBack = (Button) findViewById(R.id.back_to_matches);
 		playerAttendanceAdapter = new PlayerAttendanceAdapter(this, R.layout.player_attendance_list_item, playerAttendances);
@@ -61,6 +63,7 @@ public class ViewAttendanceListActivity extends ListActivity
 				Intent matches = new Intent(ViewAttendanceListActivity.this, MatchListActivity.class);
 				matches.putExtra("teamId", teamId);
 				matches.putExtra("teamHomeGround", teamHomeGround);
+				matches.putExtra("teamRole", (Parcelable) teamRole);
 				startActivity(matches);
 				finish();
 			}
@@ -90,22 +93,10 @@ public class ViewAttendanceListActivity extends ListActivity
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.view_attendance_menu, menu);
 	    
-	    TeamFunctions teamFunctions = new TeamFunctions();
-	    UserFunctions userFunctions = new UserFunctions();
-	    JSONObject json = teamFunctions.getTeamManager(teamId);
-	    
-	    try
-		{
-			int manager = json.getInt("manager");
-			if(manager != Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
-			{
-				menu.getItem(0).setVisible(false);
-			}
-		} 
-	    catch (JSONException e)
-		{
-			e.printStackTrace();
-		}
+	    if(teamRole.equals(TeamRole.PLAYER)) 
+	    {
+	    	menu.getItem(0).setVisible(false);
+	    }
 	}
 	
 	@Override

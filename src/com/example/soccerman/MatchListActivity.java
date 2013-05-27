@@ -6,9 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import library.MatchFunctions;
-import library.TeamFunctions;
 import library.UserFunctions;
 import models.Match;
+import models.TeamRole;
 import adapters.MatchAdapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ public class MatchListActivity extends ListActivity
 	Button btnBack, btnYes, btnNo;
 	private int teamId;
 	private String teamHomeGround;
+	private TeamRole teamRole;
 	
 	private static String KEY_SUCCESS = "success";
 	
@@ -47,6 +49,7 @@ public class MatchListActivity extends ListActivity
 		Bundle extras = getIntent().getExtras();
 	    teamId = extras.getInt("teamId");
 	    teamHomeGround = extras.getString("teamHomeGround");
+	    teamRole = extras.getParcelable("teamRole");
 	    
 		btnBack = (Button) findViewById(R.id.back_to_teams);
 		matchAdapter = new MatchAdapter(this, R.layout.match_list_item, matches);
@@ -86,25 +89,10 @@ public class MatchListActivity extends ListActivity
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.match_list_menu, menu);
 	    
-	    TeamFunctions teamFunctions = new TeamFunctions();
-	    UserFunctions userFunctions = new UserFunctions();
-	    JSONObject json = teamFunctions.getTeamManager(teamId);
-	    
-	    try
-		{
-			int manager = json.getInt("manager");
-			if(manager == Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
-			{
-				if(json.getInt("player_manager") == 0)
-				{
-					menu.getItem(0).setVisible(false);
-				}
-			}
-		} 
-	    catch (JSONException e)
-		{
-			e.printStackTrace();
-		}
+	    if(teamRole.equals(TeamRole.MANAGER))
+	    {
+	    	menu.getItem(0).setVisible(false);
+	    }
 	}
 	
 	@Override
@@ -187,6 +175,7 @@ public class MatchListActivity extends ListActivity
 	    	matchList.putExtra("matchId", matches.get(info.position).getId());
 	    	matchList.putExtra("teamId", teamId);
 	    	matchList.putExtra("teamHomeGround", teamHomeGround);
+	    	matchList.putExtra("teamRole", (Parcelable) teamRole);
 	    	startActivity(matchList);
 	    	finish();
 	    	return true;

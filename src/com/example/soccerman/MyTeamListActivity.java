@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import library.TeamFunctions;
 import library.UserFunctions;
 import models.Team;
+import models.TeamRole;
 
 import adapters.TeamAdapter;
 import android.annotation.SuppressLint;
@@ -17,6 +18,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -34,6 +36,7 @@ public class MyTeamListActivity extends ListActivity
 	private Runnable viewParts;
 	private TeamAdapter teamAdapter;
 	Button btnBack;
+	private TeamRole teamRole;
 	
 	private static String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
 	
@@ -89,9 +92,21 @@ public class MyTeamListActivity extends ListActivity
 	    
 	    try
 		{
-			int manager = json.getInt("manager");
-			if(manager != Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
+	    	int manager = json.getInt("manager");
+			if(manager == Integer.parseInt(userFunctions.getLoggedInUserId(getApplicationContext())))
 			{
+				if(json.getInt("player_manager") == 1)
+				{
+					teamRole = TeamRole.PLAYER_MANAGER;
+				}
+				else
+				{
+					teamRole = TeamRole.MANAGER;
+				}
+			}
+			else
+			{
+				teamRole = TeamRole.PLAYER;
 				menu.getItem(0).setVisible(false); // hide add match menu option for players
 				menu.getItem(2).setVisible(false); // hide view team code option for players
 			}
@@ -117,6 +132,7 @@ public class MyTeamListActivity extends ListActivity
 	    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
 	    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
 	    	viewMatches.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
+	    	viewMatches.putExtra("teamRole", (Parcelable) teamRole);
 	    	startActivity(viewMatches);
 	    	return true;
 	    case R.id.view_team_code:
