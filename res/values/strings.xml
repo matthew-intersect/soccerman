@@ -36,6 +36,7 @@
     <string name="chk_home">Home game?</string>
     <string name="chk_player_manager">Player Manager?</string>
     <string name="change_attendance">Change Attendance</string>
+    <string name="set_attendance">Set Attendance</string>
     <string name="view_attendance">View Attendance</string>
     <string name="already_registered">Already registered? Login now</string>
     <string name="register_now">I don\'t have an account. Register now</string>
