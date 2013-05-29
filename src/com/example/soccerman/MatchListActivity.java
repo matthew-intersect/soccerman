@@ -52,9 +52,9 @@ public class MatchListActivity extends ListActivity
 	    teamRole = extras.getParcelable("teamRole");
 	    
 		btnBack = (Button) findViewById(R.id.back_to_teams);
-		matchAdapter = new MatchAdapter(this, R.layout.match_list_item, matches);
+		matchAdapter = new MatchAdapter(this, R.layout.match_list_item, matches, teamRole);
 		setListAdapter(matchAdapter);
-		
+
 		btnBack.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view) 
@@ -124,6 +124,8 @@ public class MatchListActivity extends ListActivity
                 			{
                 				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
             					dialog.dismiss();
+            					finish();
+            					startActivity(getIntent());
                 			}
                 			else
                 			{
@@ -153,6 +155,8 @@ public class MatchListActivity extends ListActivity
                 			{
                 				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
             					dialog.dismiss();
+            					finish();
+            					startActivity(getIntent());
                 			}
                 			else
                 			{
@@ -190,7 +194,7 @@ public class MatchListActivity extends ListActivity
 			MatchFunctions matchFunctions = new MatchFunctions();
 			matches = matchFunctions.getAllMatches(String.valueOf(teamId));
    			
-   			matchAdapter = new MatchAdapter(MatchListActivity.this, R.layout.match_list_item, matches);
+   			matchAdapter = new MatchAdapter(MatchListActivity.this, R.layout.match_list_item, matches, teamRole);
 
    	        setListAdapter(matchAdapter);
    	        registerForContextMenu(getListView());

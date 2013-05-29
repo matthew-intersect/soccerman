@@ -3,8 +3,10 @@ package adapters;
 import java.util.ArrayList;
 import com.example.soccerman.R;
 
+import models.Attendance;
 import models.PlayerAttendance;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,14 @@ public class PlayerAttendanceAdapter extends ArrayAdapter<PlayerAttendance>
 			if(attendance != null)
 			{
 				attendance.setText(playerAttendance.getAttendance().getDisplayText());
+				if(playerAttendance.getAttendance() == Attendance.YES)
+				{
+					attendance.setTextColor(Color.GREEN);
+				}
+				else if(playerAttendance.getAttendance() == Attendance.NO)
+				{
+					attendance.setTextColor(Color.RED);
+				}
 			}
 		}
 		return v;

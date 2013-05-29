@@ -23,6 +23,7 @@ public class MatchFunctions
     private static String TEAM_MATCHES = "get_matches";
     private static String ADD_ATTENDANCE = "add_attendance";
     private static String GET_ATTENDANCE = "get_attendance";
+    private static String GET_PLAYER_ATTENDANCE = "get_player_attendance";
     
     public MatchFunctions()
     {
@@ -149,5 +150,35 @@ public class MatchFunctions
         {
         	return new ArrayList<PlayerAttendance>();
         }
+	}
+	
+	/**
+     * function to get all player attendances for a match
+     * @param match id
+     **/
+	public Attendance getPlayerMatchAttendance(int match, String player)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", GET_PLAYER_ATTENDANCE));
+        params.add(new BasicNameValuePair("match", String.valueOf(match)));
+        params.add(new BasicNameValuePair("player", player));
+        try
+        {
+        	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        	String attendance = json.getString("attendance");
+        	if(attendance.equals("1"))
+        	{
+        		return Attendance.YES;
+        	}
+        	else if(attendance.equals("0"))
+        	{
+        		return Attendance.NO;
+        	}
+        }
+        catch (JSONException e) 
+        {
+        	return Attendance.NOT_RESPONDED;
+        }
+        return Attendance.NOT_RESPONDED;
 	}
 }

@@ -28,14 +28,25 @@
    
    	<TextView
 		android:id="@+id/list_match_time"
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="20dip"
-		android:layout_alignParentRight="true"
 		android:layout_below="@id/list_match_opponent"
 		android:layout_toRightOf="@id/list_match_venue"
 		android:textStyle="bold"
 		android:gravity="center_vertical"
 		android:textIsSelectable="false"
 	 	/>
+   	
+   	<TextView
+   	    android:id="@+id/match_response"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="20dip"
+   	    android:layout_below="@id/list_match_opponent"
+		android:layout_alignParentRight="true"
+		android:textStyle="bold"
+		android:gravity="center_vertical"
+		android:textIsSelectable="false"
+		/>
+		
     
 </RelativeLayout>
