@@ -108,7 +108,7 @@ public class MyTeamListActivity extends ListActivity
 			{
 				teamRole = TeamRole.PLAYER;
 				menu.getItem(0).setVisible(false); // hide add match menu option for players
-				menu.getItem(2).setVisible(false); // hide view team code option for players
+				menu.getItem(3).setVisible(false); // hide view team code option for players
 			}
 		} 
 	    catch (JSONException e)
@@ -134,6 +134,13 @@ public class MyTeamListActivity extends ListActivity
 	    	viewMatches.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
 	    	viewMatches.putExtra("teamRole", (Parcelable) teamRole);
 	    	startActivity(viewMatches);
+	    	return true;
+	    case R.id.view_players:
+	    	Intent viewPlayers = new Intent(MyTeamListActivity.this, PlayerListActivity.class);
+	    	viewPlayers.putExtra("teamId", teams.get(info.position).getId());
+	    	viewPlayers.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
+	    	viewPlayers.putExtra("teamRole", (Parcelable) teamRole);
+	    	startActivity(viewPlayers);
 	    	return true;
 	    case R.id.view_team_code:
 	    	final Dialog viewTeamCode = new Dialog(MyTeamListActivity.this);

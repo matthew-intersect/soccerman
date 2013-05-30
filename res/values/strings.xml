@@ -25,11 +25,13 @@
     <string name="no_teams">No teams to display</string>
     <string name="no_matches">No matches to display</string>
     <string name="no_attendances">No players in team</string>
+    <string name="no_players">No players in team</string>
     <string name="manager">"Manager: "</string>
     <string name="opponent">Opponent</string>
     <string name="venue">Venue</string>
     <string name="add_match">Add Match</string>
     <string name="view_matches">View Matches</string>
+    <string name="view_players">View Players</string>
     <string name="view_team_code">View Team Code</string>
     <string name="set_date">Set Game Date</string>
     <string name="set_time">Set Game Time</string>

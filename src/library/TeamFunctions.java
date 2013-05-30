@@ -3,6 +3,7 @@ package library;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Player;
 import models.Team;
 
 import org.apache.http.NameValuePair;
@@ -22,6 +23,7 @@ public class TeamFunctions
     private static String JOIN_TEAM_TAG = "join_team";
     private static String PLAYERS_TEAM_TAG = "players_teams";
     private static String GET_MANAGER_TAG = "get_team_manager";
+    private static String GET_PLAYERS = "get_team_players";
      
     // constructor
     public TeamFunctions()
@@ -96,6 +98,41 @@ public class TeamFunctions
         catch (JSONException e) 
         {
         	return new ArrayList<Team>();
+        }
+	}
+	
+	/**
+     * function to get all players of a team
+     * @param team id
+     **/
+	public ArrayList<Player> getTeamPlayers(int team)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", GET_PLAYERS));
+        params.add(new BasicNameValuePair("team", String.valueOf(team)));
+
+        try
+        {
+        	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        	if(Integer.parseInt(json.getString("success")) == 1)
+        	{
+	        	ArrayList<Player> players = new ArrayList<Player>();
+	        	JSONArray array = json.getJSONArray("players");
+	        	
+	        	for(int i=0;i<array.length();i++)
+	        	{
+	        		JSONObject player = array.getJSONObject(i);
+	        		players.add(new Player(player.getInt("id"), player.getString("name")));
+	        	}
+	        	return players;
+        	}
+        	else {
+        		return new ArrayList<Player>();
+        	}
+        }
+        catch (JSONException e) 
+        {
+        	return new ArrayList<Player>();
         }
 	}
     

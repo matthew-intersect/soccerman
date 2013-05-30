@@ -1,5 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/add_match" android:title="@string/add_match" />
     <item android:id="@+id/view_matches" android:title="@string/view_matches" />
+    <item android:id="@+id/view_players" android:title="@string/view_players" />
     <item android:id="@+id/view_team_code" android:title="@string/view_team_code" />
 </menu>
