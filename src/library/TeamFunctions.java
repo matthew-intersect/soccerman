@@ -23,7 +23,8 @@ public class TeamFunctions
     private static String JOIN_TEAM_TAG = "join_team";
     private static String PLAYERS_TEAM_TAG = "players_teams";
     private static String GET_MANAGER_TAG = "get_team_manager";
-    private static String GET_PLAYERS = "get_team_players";
+    private static String GET_PLAYERS_TAG = "get_team_players";
+    private static String CHANGE_CODE_TAG = "change_team_code";
      
     // constructor
     public TeamFunctions()
@@ -108,7 +109,7 @@ public class TeamFunctions
 	public ArrayList<Player> getTeamPlayers(int team)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", GET_PLAYERS));
+        params.add(new BasicNameValuePair("tag", GET_PLAYERS_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
 
         try
@@ -147,6 +148,20 @@ public class TeamFunctions
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
 
+        return json;
+	}
+	
+	/**
+     * function to change a team's code
+     * @param team id
+     **/
+	public JSONObject changeTeamCode(int team)
+	{
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", CHANGE_CODE_TAG));
+        params.add(new BasicNameValuePair("team", String.valueOf(team)));
+        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        
         return json;
 	}
 }

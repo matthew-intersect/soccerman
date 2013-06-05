@@ -28,6 +28,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class MyTeamListActivity extends ListActivity
@@ -39,6 +40,7 @@ public class MyTeamListActivity extends ListActivity
 	private TeamRole teamRole;
 	
 	private static String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
+	public static String KEY_SUCCESS = "success";
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -120,7 +122,7 @@ public class MyTeamListActivity extends ListActivity
 	@Override
 	public boolean onContextItemSelected(MenuItem item) 
 	{
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 	    switch (item.getItemId()) {
 	    case R.id.add_match:
 	        Intent addMatch = new Intent(MyTeamListActivity.this, AddMatchActivity.class);
@@ -147,9 +149,10 @@ public class MyTeamListActivity extends ListActivity
 	    	viewTeamCode.setTitle(teams.get(info.position).getName() + " Team Code");
 			viewTeamCode.setContentView(R.layout.view_team_code);
 			
-			TextView teamCode = (TextView) viewTeamCode.findViewById(R.id.view_team_code);
+			final TextView teamCode = (TextView) viewTeamCode.findViewById(R.id.view_team_code);
 			TextView teamCodeMessage = (TextView) viewTeamCode.findViewById(R.id.view_team_code_message);
 			Button btnOk = (Button) viewTeamCode.findViewById(R.id.view_team_code_ok);
+			Button btnChangeCode = (Button) viewTeamCode.findViewById(R.id.btnChangeCode);
 			teamCode.setText(teams.get(info.position).getCode());
 			teamCodeMessage.setText(TEAM_CODE_MESSAGE);
 			
@@ -158,9 +161,37 @@ public class MyTeamListActivity extends ListActivity
 				@Override
 				public void onClick(View v)
 				{
-					viewTeamCode.dismiss();					
+					viewTeamCode.dismiss();
 				}
 			});
+			
+			btnChangeCode.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					TeamFunctions teamFunctions = new TeamFunctions();
+					JSONObject json = teamFunctions.changeTeamCode(teams.get(info.position).getId());
+					try
+					{
+						if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+						{
+							teamCode.setText(json.getString("code"));
+							Toast.makeText(MyTeamListActivity.this, "Code changed successfully", Toast.LENGTH_LONG).show();
+						}
+						else
+						{
+							Toast.makeText(MyTeamListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+							viewTeamCode.dismiss();
+						}
+					}
+					catch (JSONException e) 
+                	{
+            			e.printStackTrace();
+            		}
+				}
+			});
+			
 	    	viewTeamCode.show();
 	    	return true;
 	    }

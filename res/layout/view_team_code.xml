@@ -28,5 +28,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dip"
         android:text="@string/ok" />
+    
+    <Button
+        android:id="@+id/btnChangeCode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:background="@null"
+        android:text="@string/change_code"
+        android:textColor="#21dbd4"
+        android:textStyle="bold" />
 
 </LinearLayout>

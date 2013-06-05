@@ -32,7 +32,8 @@
     <string name="add_match">Add Match</string>
     <string name="view_matches">View Matches</string>
     <string name="view_players">View Players</string>
-    <string name="view_team_code">View Team Code</string>
+    <string name="view_team_code">View/Change Team Code</string>
+    <string name="change_code">Generate new team code</string>
     <string name="set_date">Set Game Date</string>
     <string name="set_time">Set Game Time</string>
     <string name="chk_home">Home game?</string>
