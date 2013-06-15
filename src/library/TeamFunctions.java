@@ -17,7 +17,7 @@ public class TeamFunctions
 
 	private JSONParser jsonParser;
     
-    private static String dbURL = "http://10.0.2.2/ah_login_api/";
+    private static String dbURL = "http://10.0.2.2/ah_login_api/team_index.php";
      
     private static String ADD_TEAM_TAG = "add_team";
     private static String JOIN_TEAM_TAG = "join_team";
