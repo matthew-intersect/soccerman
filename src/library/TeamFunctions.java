@@ -25,6 +25,7 @@ public class TeamFunctions
     private static String GET_MANAGER_TAG = "get_team_manager";
     private static String GET_PLAYERS_TAG = "get_team_players";
     private static String CHANGE_CODE_TAG = "change_team_code";
+    private static String REMOVE_PLAYER_TAG = "remove_player";
      
     // constructor
     public TeamFunctions()
@@ -160,6 +161,24 @@ public class TeamFunctions
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", CHANGE_CODE_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
+        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        
+        return json;
+	}
+	
+	/**
+     * function to remove a player from a team
+     * @param team id
+     * @param player id
+     **/
+	public JSONObject removePlayer(int team, int player)
+	{
+		System.out.println(team);
+		System.out.println(player);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", REMOVE_PLAYER_TAG));
+        params.add(new BasicNameValuePair("team", String.valueOf(team)));
+        params.add(new BasicNameValuePair("player", String.valueOf(player)));
         JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
         
         return json;

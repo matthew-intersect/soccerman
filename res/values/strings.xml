@@ -46,5 +46,6 @@
     <string name="back_to_menu">Back to menu</string>
     <string name="back_to_teams">Back to team list</string>
     <string name="back_to_matches">Back to match list</string>
+    <string name="remove_player">Remove Player</string>
 
 </resources>

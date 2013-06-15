@@ -2,7 +2,11 @@ package com.example.soccerman;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import library.TeamFunctions;
+import library.UserFunctions;
 import models.Player;
 import models.TeamRole;
 import adapters.PlayerAdapter;
@@ -14,10 +18,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 @SuppressLint("HandlerLeak")
 public class PlayerListActivity extends ListActivity
@@ -78,13 +85,46 @@ public class PlayerListActivity extends ListActivity
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.player_list_menu, menu);
 	    
-	    if(teamRole.equals(TeamRole.MANAGER))
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+	    String currentUserId = new UserFunctions().getLoggedInUserId(getApplicationContext());
+	    
+	    if(teamRole.equals(TeamRole.PLAYER) || 
+	    		players.get(info.position).getPlayerId() == Integer.parseInt(currentUserId))
 	    {
 	    	menu.getItem(0).setVisible(false);
 	    }
 	}
 	
-	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) 
+	{
+		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.remove_player:
+			int playerId = players.get(info.position).getPlayerId();
+			TeamFunctions teamFunctions = new TeamFunctions();
+			
+			JSONObject json = teamFunctions.removePlayer(teamId, playerId);
+			try
+        	{
+        		if (json.getString(KEY_SUCCESS) != null && Integer.parseInt(json.getString(KEY_SUCCESS)) == 1) 
+        		{
+    				Toast.makeText(PlayerListActivity.this, "Player removed successfully", Toast.LENGTH_LONG).show();
+					finish();
+					startActivity(getIntent());
+    			}
+    			else
+    			{
+    				Toast.makeText(PlayerListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+    			}
+        	}
+			catch (JSONException e) 
+        	{
+    			e.printStackTrace();
+    		}
+		}
+		return false;
+	}
 	
 	private Handler handler = new Handler()
    	{
