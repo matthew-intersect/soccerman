@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.TeamFunctions;
 import library.UserFunctions;
 import models.Team;
@@ -38,9 +39,6 @@ public class MyTeamListActivity extends ListActivity
 	private TeamAdapter teamAdapter;
 	Button btnBack;
 	private TeamRole teamRole;
-	
-	private static String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
-	public static String KEY_SUCCESS = "success";
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -154,7 +152,7 @@ public class MyTeamListActivity extends ListActivity
 			Button btnOk = (Button) viewTeamCode.findViewById(R.id.view_team_code_ok);
 			Button btnChangeCode = (Button) viewTeamCode.findViewById(R.id.btnChangeCode);
 			teamCode.setText(teams.get(info.position).getCode());
-			teamCodeMessage.setText(TEAM_CODE_MESSAGE);
+			teamCodeMessage.setText(Constants.TEAM_CODE_MESSAGE);
 			
 			btnOk.setOnClickListener(new View.OnClickListener()
 			{
@@ -174,7 +172,7 @@ public class MyTeamListActivity extends ListActivity
 					JSONObject json = teamFunctions.changeTeamCode(teams.get(info.position).getId());
 					try
 					{
-						if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+						if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
 						{
 							teamCode.setText(json.getString("code"));
 							Toast.makeText(MyTeamListActivity.this, "Code changed successfully", Toast.LENGTH_LONG).show();

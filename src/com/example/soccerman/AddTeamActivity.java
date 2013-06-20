@@ -3,6 +3,7 @@ package com.example.soccerman;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.TeamFunctions;
 import library.UserFunctions;
 import android.app.Activity;
@@ -22,13 +23,6 @@ public class AddTeamActivity extends Activity
 	EditText inputTeamName, inputHomeGround;
 	CheckBox chkPlayerManager;
 	TextView addTeamErrorMsg;
-	
-	private static String TEAM_ADD_MESSAGE = "Your team has been successfully created. For players to join this team, get them to use the following code: ";
-	
-	// JSON response names
-	private static String KEY_SUCCESS = "success";
-	private static String TEAM_CODE = "code";
-	private static String TEAM_NAME = "name";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -68,9 +62,9 @@ public class AddTeamActivity extends Activity
                 	// check for add team response
                 	try
                 	{
-                		if (json.getString(KEY_SUCCESS) != null) 
+                		if (json.getString(Constants.KEY_SUCCESS) != null) 
                 		{
-                			String res = json.getString(KEY_SUCCESS); 
+                			String res = json.getString(Constants.KEY_SUCCESS); 
                 			if(Integer.parseInt(res) == 1)
                 			{
                 				addTeamErrorMsg.setText("");
@@ -85,9 +79,9 @@ public class AddTeamActivity extends Activity
                 				
                 				JSONObject json_team = json.getJSONObject("team");
                 				
-                				dialog.setTitle("Team: " + json_team.getString(TEAM_NAME));
-                				addTeamMessage.setText(TEAM_ADD_MESSAGE);
-	                			addTeamCode.setText(json_team.getString(TEAM_CODE));
+                				dialog.setTitle("Team: " + json_team.getString(Constants.KEY_NAME));
+                				addTeamMessage.setText(Constants.TEAM_ADD_MESSAGE);
+	                			addTeamCode.setText(json_team.getString(Constants.KEY_CODE));
 	                			
 	                			addTeamOk.setOnClickListener(new View.OnClickListener() 
 	                			{

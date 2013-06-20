@@ -5,6 +5,7 @@ import org.json.JSONObject;
  
 import library.DatabaseHandler;
 import library.UserFunctions;
+import library.Constants;
  
 import android.app.Activity;
 import android.content.Intent;
@@ -19,14 +20,6 @@ public class RegisterActivity extends Activity {
     Button btnLinkToLogin;
     EditText inputFullName, inputEmail, inputPassword, inputConfirmPassword;
     TextView registerErrorMsg;
-     
-    // JSON Response node names
-    private static String KEY_SUCCESS = "success";
-    private static String KEY_ERROR = "error";
-    private static String KEY_NAME = "name";
-    private static String KEY_EMAIL = "email";
-    private static String KEY_ID = "id";
-    private static String KEY_CREATED_AT = "created_at";
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,10 +72,10 @@ public class RegisterActivity extends Activity {
                  
                 // check for login response
                 try {
-                    if (json.getString(KEY_SUCCESS) != null) 
+                    if (json.getString(Constants.KEY_SUCCESS) != null) 
                     {
                         registerErrorMsg.setText("");
-                        String res = json.getString(KEY_SUCCESS); 
+                        String res = json.getString(Constants.KEY_SUCCESS); 
                         if(Integer.parseInt(res) == 1)
                         {
                             // user successfully registered
@@ -92,7 +85,8 @@ public class RegisterActivity extends Activity {
                              
                             // Clear all previous data in database
                             userFunction.logoutUser(getApplicationContext());
-                            db.addUser(json.getInt(KEY_ID), json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_CREATED_AT));                        
+                            db.addUser(json.getInt(Constants.KEY_ID), json_user.getString(Constants.KEY_NAME),
+                            		json_user.getString(Constants.KEY_EMAIL), json_user.getString(Constants.KEY_CREATED_AT));                        
                             Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
                             dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(dashboard);
@@ -100,7 +94,7 @@ public class RegisterActivity extends Activity {
                         }
                         else
                         {
-                        	if(Integer.parseInt(json.getString(KEY_ERROR)) == 2)
+                        	if(Integer.parseInt(json.getString(Constants.KEY_ERROR)) == 2)
                         	{
                         		registerErrorMsg.setText("User with given email already exists");
                         		return;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.TeamFunctions;
 import library.UserFunctions;
 import models.Player;
@@ -35,8 +36,6 @@ public class PlayerListActivity extends ListActivity
 	private Button btnBack;
 	private int teamId;
 	private TeamRole teamRole;
-	
-	private static String KEY_SUCCESS = "success";
 	
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -107,7 +106,7 @@ public class PlayerListActivity extends ListActivity
 			JSONObject json = teamFunctions.removePlayer(teamId, playerId);
 			try
         	{
-        		if (json.getString(KEY_SUCCESS) != null && Integer.parseInt(json.getString(KEY_SUCCESS)) == 1) 
+        		if (json.getString(Constants.KEY_SUCCESS) != null && Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1) 
         		{
     				Toast.makeText(PlayerListActivity.this, "Player removed successfully", Toast.LENGTH_LONG).show();
 					finish();

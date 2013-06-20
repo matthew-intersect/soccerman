@@ -11,20 +11,10 @@ import android.content.Context;
  
 public class UserFunctions 
 {
-     
     private JSONParser jsonParser;
-     
-    // Testing in localhost using wamp or xampp 
-    // use http://10.0.2.2/ to connect to your localhost ie http://localhost/
-    //private static String loginURL = "http://10.0.2.2/ah_login_api/";
-    //private static String registerURL = "http://10.0.2.2/ah_login_api/";
-    private static String dbURL = "http://10.0.2.2/ah_login_api/user_index.php";
-     
-    private static String login_tag = "login";
-    private static String register_tag = "register";
-     
-    // constructor
-    public UserFunctions(){
+ 
+    public UserFunctions()
+    {
         jsonParser = new JSONParser();
     }
      
@@ -33,15 +23,14 @@ public class UserFunctions
      * @param email
      * @param password
      * */
-    public JSONObject loginUser(String email, String password){
-        // Building Parameters
+    public JSONObject loginUser(String email, String password)
+    {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", login_tag));
+        params.add(new BasicNameValuePair("tag", Constants.LOGIN_TAG));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
-        // return json
-        // Log.e("JSON", json.toString());
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+
         return json;
     }
      
@@ -51,17 +40,15 @@ public class UserFunctions
      * @param email
      * @param password
      * */
-    public JSONObject registerUser(String name, String email, String password){
-        // Building Parameters
+    public JSONObject registerUser(String name, String email, String password)
+    {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("tag", Constants.REGISTER_TAG));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-         
-        // getting JSON Object
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
-        // return json
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+
         return json;
     }
      
@@ -86,7 +73,8 @@ public class UserFunctions
     /**
      * Function get Login status
      * */
-    public boolean isUserLoggedIn(Context context){
+    public boolean isUserLoggedIn(Context context)
+    {
         DatabaseHandler db = new DatabaseHandler(context);
         int count = db.getRowCount();
         if(count > 0)
@@ -101,7 +89,8 @@ public class UserFunctions
      * Function to logout user
      * Reset Database
      * */
-    public boolean logoutUser(Context context){
+    public boolean logoutUser(Context context)
+    {
         DatabaseHandler db = new DatabaseHandler(context);
         db.resetTables();
         return true;

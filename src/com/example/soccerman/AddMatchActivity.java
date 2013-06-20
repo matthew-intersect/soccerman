@@ -6,6 +6,7 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.MatchFunctions;
 import library.UserFunctions;
 import android.annotation.SuppressLint;
@@ -35,10 +36,7 @@ public class AddMatchActivity extends Activity
 	
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
-	
-	// JSON response names
-	private static String KEY_SUCCESS = "success";
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -103,9 +101,9 @@ public class AddMatchActivity extends Activity
 					
 					try
 					{
-						if (json.getString(KEY_SUCCESS) != null) 
+						if (json.getString(Constants.KEY_SUCCESS) != null) 
 						{
-							String res = json.getString(KEY_SUCCESS); 
+							String res = json.getString(Constants.KEY_SUCCESS); 
                 			if(Integer.parseInt(res) == 1)
                 			{
                 				addMatchErrorMsg.setText("");

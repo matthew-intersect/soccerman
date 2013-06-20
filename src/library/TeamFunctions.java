@@ -14,39 +14,27 @@ import org.json.JSONObject;
 
 public class TeamFunctions
 {
-
 	private JSONParser jsonParser;
+
+	public TeamFunctions()
+	{
+		jsonParser = new JSONParser();
+	}
     
-    private static String dbURL = "http://10.0.2.2/ah_login_api/team_index.php";
-     
-    private static String ADD_TEAM_TAG = "add_team";
-    private static String JOIN_TEAM_TAG = "join_team";
-    private static String PLAYERS_TEAM_TAG = "players_teams";
-    private static String GET_MANAGER_TAG = "get_team_manager";
-    private static String GET_PLAYERS_TAG = "get_team_players";
-    private static String CHANGE_CODE_TAG = "change_team_code";
-    private static String REMOVE_PLAYER_TAG = "remove_player";
-     
-    // constructor
-    public TeamFunctions()
-    {
-        jsonParser = new JSONParser();
-    }
-    
-    /**
-     * function to store team
-     * @param name
-     * @param user created by
-     **/
+	/**
+	 * function to store team
+	 * @param name
+	 * @param user created by
+	 **/
     public JSONObject addTeam(String name, String created_by, int playerManager, String homeGround)
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", ADD_TEAM_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.ADD_TEAM_TAG));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("created_by", created_by));
         params.add(new BasicNameValuePair("player_manager", String.valueOf(playerManager)));
         params.add(new BasicNameValuePair("home_ground", homeGround));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
 
         return json;
     }
@@ -59,10 +47,10 @@ public class TeamFunctions
 	public JSONObject addPlayer(String code, String player)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", JOIN_TEAM_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.JOIN_TEAM_TAG));
         params.add(new BasicNameValuePair("code", code));
         params.add(new BasicNameValuePair("player", player));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
 
         return json;
 	}
@@ -75,11 +63,11 @@ public class TeamFunctions
 	public ArrayList<Team> getAllTeams(String player)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", PLAYERS_TEAM_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.PLAYERS_TEAM_TAG));
         params.add(new BasicNameValuePair("player", player));
         try
         {
-        	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        	JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
         	if(Integer.parseInt(json.getString("success")) == 1)
         	{
 	        	ArrayList<Team> teams = new ArrayList<Team>();
@@ -110,12 +98,12 @@ public class TeamFunctions
 	public ArrayList<Player> getTeamPlayers(int team)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", GET_PLAYERS_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.GET_PLAYERS_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
 
         try
         {
-        	JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        	JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
         	if(Integer.parseInt(json.getString("success")) == 1)
         	{
 	        	ArrayList<Player> players = new ArrayList<Player>();
@@ -145,9 +133,9 @@ public class TeamFunctions
 	public JSONObject getTeamManager(int team)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", GET_MANAGER_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.GET_MANAGER_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
 
         return json;
 	}
@@ -159,9 +147,9 @@ public class TeamFunctions
 	public JSONObject changeTeamCode(int team)
 	{
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", CHANGE_CODE_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.CHANGE_CODE_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
         
         return json;
 	}
@@ -173,13 +161,11 @@ public class TeamFunctions
      **/
 	public JSONObject removePlayer(int team, int player)
 	{
-		System.out.println(team);
-		System.out.println(player);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", REMOVE_PLAYER_TAG));
+        params.add(new BasicNameValuePair("tag", Constants.REMOVE_PLAYER_TAG));
         params.add(new BasicNameValuePair("team", String.valueOf(team)));
         params.add(new BasicNameValuePair("player", String.valueOf(player)));
-        JSONObject json = jsonParser.getJSONFromUrl(dbURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.TEAMS_DB_URL, params);
         
         return json;
 	}

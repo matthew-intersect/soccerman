@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.MatchFunctions;
 import models.PlayerAttendance;
 import models.TeamRole;
@@ -38,9 +39,7 @@ public class ViewAttendanceListActivity extends ListActivity
 	private Button btnBack;
 	private String teamHomeGround;
 	private TeamRole teamRole;
-	
-	private static String KEY_SUCCESS = "success";
-	
+
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
@@ -123,9 +122,9 @@ public class ViewAttendanceListActivity extends ListActivity
 						JSONObject json = matchFunctions.addAttendance(String.valueOf(playerId), matchId, 1); // 1 for yes
 						try
 	                	{
-	                		if (json.getString(KEY_SUCCESS) != null) 
+	                		if (json.getString(Constants.KEY_SUCCESS) != null) 
 	                		{
-	                			if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
 	                			{
 	                				Toast.makeText(ViewAttendanceListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();
@@ -154,9 +153,9 @@ public class ViewAttendanceListActivity extends ListActivity
 						JSONObject json = matchFunctions.addAttendance(String.valueOf(playerId), matchId, 0); // 0 for no
 						try
 	                	{
-	                		if (json.getString(KEY_SUCCESS) != null) 
+	                		if (json.getString(Constants.KEY_SUCCESS) != null) 
 	                		{
-	                			if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1)
+	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
 	                			{
 	                				Toast.makeText(ViewAttendanceListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();

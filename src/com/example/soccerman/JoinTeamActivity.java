@@ -3,6 +3,7 @@ package com.example.soccerman;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import library.Constants;
 import library.TeamFunctions;
 import library.UserFunctions;
 import android.app.Activity;
@@ -20,12 +21,7 @@ public class JoinTeamActivity extends Activity
 	EditText inputTeamCode;
 	Button btnJoinTeam, btnCancel;
 	TextView joinTeamErrorMsg;
-	
-	// JSON response names
-	private static String KEY_SUCCESS = "success";
-	
-	private static String JOIN_TEAM_ERROR = "Team with entered code doesn't exist";
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -50,7 +46,7 @@ public class JoinTeamActivity extends Activity
         			
         			if(code.equals(""))
         			{
-        				joinTeamErrorMsg.setText(JOIN_TEAM_ERROR);
+        				joinTeamErrorMsg.setText(Constants.JOIN_TEAM_ERROR);
         				return;
         			}
         			
@@ -60,9 +56,9 @@ public class JoinTeamActivity extends Activity
                 	// check for join team response
                 	try
                 	{
-                		if (json.getString(KEY_SUCCESS) != null) 
+                		if (json.getString(Constants.KEY_SUCCESS) != null) 
                 		{
-                			String res = json.getString(KEY_SUCCESS); 
+                			String res = json.getString(Constants.KEY_SUCCESS); 
                 			if(Integer.parseInt(res) == 1)
                 			{
                 				joinTeamErrorMsg.setText("");
@@ -75,7 +71,7 @@ public class JoinTeamActivity extends Activity
                 			}
                 			else
                 			{
-                				joinTeamErrorMsg.setText(JOIN_TEAM_ERROR);
+                				joinTeamErrorMsg.setText(Constants.JOIN_TEAM_ERROR);
                 			}
                 		}
                 	}

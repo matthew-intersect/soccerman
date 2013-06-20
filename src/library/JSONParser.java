@@ -21,15 +21,14 @@ import android.annotation.SuppressLint;
 import android.os.StrictMode;
 import android.util.Log;
  
-public class JSONParser {
- 
+public class JSONParser 
+{
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
  
-    // constructor
-    public JSONParser() {
- 
+    public JSONParser()
+    {
     }
  
     @SuppressLint("NewApi")
@@ -37,7 +36,8 @@ public class JSONParser {
     {
     	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
     	StrictMode.setThreadPolicy(policy); 
-        try {
+        try
+        {
             // defaultHttpClient
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
@@ -47,37 +47,47 @@ public class JSONParser {
             HttpEntity httpEntity = httpResponse.getEntity();
             is = httpEntity.getContent();
  
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e)
+        {
             e.printStackTrace();
-        } catch (ClientProtocolException e) {
+        }
+        catch (ClientProtocolException e)
+        {
             e.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
  
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+        try
+        {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
+            {
                 sb.append(line + "n");
             }
             is.close();
             json = sb.toString();
             Log.e("JSON", json);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
  
-        // try parse the string to a JSON object
-        try {
+        try
+        {
             jObj = new JSONObject(json);            
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
  
-        // return JSON String
         return jObj;
  
     }
