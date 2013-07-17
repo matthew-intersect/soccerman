@@ -48,7 +48,7 @@ public class ViewAttendanceListActivity extends ListActivity
 		Bundle extras = getIntent().getExtras();
 	    matchId = extras.getInt("matchId");
 	    teamId = extras.getInt("teamId");
-	    teamHomeGround = extras.getString("teamHomeGrond");
+	    teamHomeGround = extras.getString("teamHomeGround");
 	    teamRole = extras.getParcelable("teamRole");
 		
 		btnBack = (Button) findViewById(R.id.back_to_matches);
