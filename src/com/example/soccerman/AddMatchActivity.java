@@ -130,7 +130,8 @@ public class AddMatchActivity extends Activity
     	    btnCancelAdd.setOnClickListener(new View.OnClickListener()
             {
     	    	@Override
-            	public void onClick(View view) {
+            	public void onClick(View view)
+    	    	{
             		Intent dashboard = new Intent(AddMatchActivity.this, MyTeamListActivity.class);
             		startActivity(dashboard);
             		finish();

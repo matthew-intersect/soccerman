@@ -98,29 +98,30 @@ public class PlayerListActivity extends ListActivity
 	public boolean onContextItemSelected(MenuItem item) 
 	{
 		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.remove_player:
-			int playerId = players.get(info.position).getPlayerId();
-			TeamFunctions teamFunctions = new TeamFunctions();
-			
-			JSONObject json = teamFunctions.removePlayer(teamId, playerId);
-			try
-        	{
-        		if (json.getString(Constants.KEY_SUCCESS) != null && Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1) 
-        		{
-    				Toast.makeText(PlayerListActivity.this, "Player removed successfully", Toast.LENGTH_LONG).show();
-					finish();
-					startActivity(getIntent());
-    			}
-    			else
-    			{
-    				Toast.makeText(PlayerListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
-    			}
-        	}
-			catch (JSONException e) 
-        	{
-    			e.printStackTrace();
-    		}
+		switch (item.getItemId())
+		{
+			case R.id.remove_player:
+				int playerId = players.get(info.position).getPlayerId();
+				TeamFunctions teamFunctions = new TeamFunctions();
+				
+				JSONObject json = teamFunctions.removePlayer(teamId, playerId);
+				try
+	        	{
+	        		if (json.getString(Constants.KEY_SUCCESS) != null && Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1) 
+	        		{
+	    				Toast.makeText(PlayerListActivity.this, "Player removed successfully", Toast.LENGTH_LONG).show();
+						finish();
+						startActivity(getIntent());
+	    			}
+	    			else
+	    			{
+	    				Toast.makeText(PlayerListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+	    			}
+	        	}
+				catch (JSONException e) 
+	        	{
+	    			e.printStackTrace();
+	    		}
 		}
 		return false;
 	}

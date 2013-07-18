@@ -23,7 +23,8 @@ public enum TeamRole implements Parcelable
 		dest.writeInt(ordinal());
 	}
 	
-	public static final Creator<TeamRole> CREATOR = new Creator<TeamRole>() {
+	public static final Creator<TeamRole> CREATOR = new Creator<TeamRole>()
+	{
         @Override
         public TeamRole createFromParcel(final Parcel source) 
         {

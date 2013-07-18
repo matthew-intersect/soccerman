@@ -38,7 +38,8 @@ public class LoginActivity extends Activity
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
  
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
@@ -51,13 +52,14 @@ public class LoginActivity extends Activity
                 UserFunctions userFunction = new UserFunctions();
                 JSONObject json = userFunction.loginUser(email, password);
  
-                try {
-                    if (json.getString(Constants.KEY_SUCCESS) != null) {
+                try
+                {
+                    if (json.getString(Constants.KEY_SUCCESS) != null)
+                    {
                         loginErrorMsg.setText("");
                         String res = json.getString(Constants.KEY_SUCCESS); 
                         if(Integer.parseInt(res) == 1)
                         {
-                            // user successfully logged in
                             // Store user details in SQLite Database
                             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                             JSONObject json_user = json.getJSONObject("user");
@@ -68,8 +70,6 @@ public class LoginActivity extends Activity
                             		json_user.getString(Constants.KEY_EMAIL), json_user.getString(Constants.KEY_CREATED_AT));                        
                              
                             Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-                             
-                            // Close all views before launching Dashboard
                             dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(dashboard);
                             finish();
@@ -79,15 +79,19 @@ public class LoginActivity extends Activity
                             loginErrorMsg.setText("Incorrect username/password");
                         }
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
         });
  
-        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+        btnLinkToRegister.setOnClickListener(new View.OnClickListener()
+        {
  
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
                 startActivity(i);

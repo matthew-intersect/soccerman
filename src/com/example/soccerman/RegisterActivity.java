@@ -15,29 +15,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
  
-public class RegisterActivity extends Activity {
-    Button btnRegister;
-    Button btnLinkToLogin;
+public class RegisterActivity extends Activity
+{
+    Button btnRegister, btnLinkToLogin;
     EditText inputFullName, inputEmail, inputPassword, inputConfirmPassword;
     TextView registerErrorMsg;
  
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
  
-        // Importing all assets like buttons, text fields
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         inputFullName = (EditText) findViewById(R.id.registerName);
         inputEmail = (EditText) findViewById(R.id.registerEmail);
         inputPassword = (EditText) findViewById(R.id.registerPassword);
         inputConfirmPassword = (EditText) findViewById(R.id.registerConfirmPassword);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         registerErrorMsg = (TextView) findViewById(R.id.register_error);
          
-        // Register Button Click event
-        btnRegister.setOnClickListener(new View.OnClickListener() {         
-            public void onClick(View view) {
+        btnRegister.setOnClickListener(new View.OnClickListener()
+        {         
+            public void onClick(View view)
+            {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
@@ -70,15 +71,14 @@ public class RegisterActivity extends Activity {
                 UserFunctions userFunction = new UserFunctions();
                 JSONObject json = userFunction.registerUser(name, email, password);
                  
-                // check for login response
-                try {
+                try
+                {
                     if (json.getString(Constants.KEY_SUCCESS) != null) 
                     {
                         registerErrorMsg.setText("");
                         String res = json.getString(Constants.KEY_SUCCESS); 
                         if(Integer.parseInt(res) == 1)
                         {
-                            // user successfully registered
                             // Store user details in local database 
                             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                             JSONObject json_user = json.getJSONObject("user");
@@ -102,20 +102,21 @@ public class RegisterActivity extends Activity {
                         	registerErrorMsg.setText("Error occurred in registration. Try again later");
                         }
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
         });
  
-        // Link to Login Screen
-        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+        btnLinkToLogin.setOnClickListener(new View.OnClickListener()
+        {
  
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        LoginActivity.class);
-                startActivity(i);
-                // Close Registration View
+            public void onClick(View view)
+            {
+                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(login);
                 finish();
             }
         });

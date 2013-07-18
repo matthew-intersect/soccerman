@@ -16,7 +16,8 @@ public class TeamAdapter extends ArrayAdapter<Team>
 {
 	private ArrayList<Team> teams;
 	
-	public TeamAdapter(Context context, int textViewResourceId, ArrayList<Team> objects) {
+	public TeamAdapter(Context context, int textViewResourceId, ArrayList<Team> objects)
+	{
 		super(context, textViewResourceId, objects);
 		this.teams = objects;
 	}

@@ -121,77 +121,78 @@ public class MyTeamListActivity extends ListActivity
 	public boolean onContextItemSelected(MenuItem item) 
 	{
 		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    switch (item.getItemId()) {
-	    case R.id.add_match:
-	        Intent addMatch = new Intent(MyTeamListActivity.this, AddMatchActivity.class);
-	        addMatch.putExtra("teamId", teams.get(info.position).getId());
-	        addMatch.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
-	        startActivity(addMatch);
-	        return true;
-	    case R.id.view_matches:
-	    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
-	    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
-	    	viewMatches.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
-	    	viewMatches.putExtra("teamRole", (Parcelable) teamRole);
-	    	startActivity(viewMatches);
-	    	return true;
-	    case R.id.view_players:
-	    	Intent viewPlayers = new Intent(MyTeamListActivity.this, PlayerListActivity.class);
-	    	viewPlayers.putExtra("teamId", teams.get(info.position).getId());
-	    	viewPlayers.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
-	    	viewPlayers.putExtra("teamRole", (Parcelable) teamRole);
-	    	startActivity(viewPlayers);
-	    	return true;
-	    case R.id.view_team_code:
-	    	final Dialog viewTeamCode = new Dialog(MyTeamListActivity.this);
-	    	viewTeamCode.setTitle(teams.get(info.position).getName() + " Team Code");
-			viewTeamCode.setContentView(R.layout.view_team_code);
-			
-			final TextView teamCode = (TextView) viewTeamCode.findViewById(R.id.view_team_code);
-			TextView teamCodeMessage = (TextView) viewTeamCode.findViewById(R.id.view_team_code_message);
-			Button btnOk = (Button) viewTeamCode.findViewById(R.id.view_team_code_ok);
-			Button btnChangeCode = (Button) viewTeamCode.findViewById(R.id.btnChangeCode);
-			teamCode.setText(teams.get(info.position).getCode());
-			teamCodeMessage.setText(Constants.TEAM_CODE_MESSAGE);
-			
-			btnOk.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
+	    switch (item.getItemId())
+	    {
+		    case R.id.add_match:
+		        Intent addMatch = new Intent(MyTeamListActivity.this, AddMatchActivity.class);
+		        addMatch.putExtra("teamId", teams.get(info.position).getId());
+		        addMatch.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
+		        startActivity(addMatch);
+		        return true;
+		    case R.id.view_matches:
+		    	Intent viewMatches = new Intent(MyTeamListActivity.this, MatchListActivity.class);
+		    	viewMatches.putExtra("teamId", teams.get(info.position).getId());
+		    	viewMatches.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
+		    	viewMatches.putExtra("teamRole", (Parcelable) teamRole);
+		    	startActivity(viewMatches);
+		    	return true;
+		    case R.id.view_players:
+		    	Intent viewPlayers = new Intent(MyTeamListActivity.this, PlayerListActivity.class);
+		    	viewPlayers.putExtra("teamId", teams.get(info.position).getId());
+		    	viewPlayers.putExtra("teamHomeGround", teams.get(info.position).getHomeGround());
+		    	viewPlayers.putExtra("teamRole", (Parcelable) teamRole);
+		    	startActivity(viewPlayers);
+		    	return true;
+		    case R.id.view_team_code:
+		    	final Dialog viewTeamCode = new Dialog(MyTeamListActivity.this);
+		    	viewTeamCode.setTitle(teams.get(info.position).getName() + " Team Code");
+				viewTeamCode.setContentView(R.layout.view_team_code);
+				
+				final TextView teamCode = (TextView) viewTeamCode.findViewById(R.id.view_team_code);
+				TextView teamCodeMessage = (TextView) viewTeamCode.findViewById(R.id.view_team_code_message);
+				Button btnOk = (Button) viewTeamCode.findViewById(R.id.view_team_code_ok);
+				Button btnChangeCode = (Button) viewTeamCode.findViewById(R.id.btnChangeCode);
+				teamCode.setText(teams.get(info.position).getCode());
+				teamCodeMessage.setText(Constants.TEAM_CODE_MESSAGE);
+				
+				btnOk.setOnClickListener(new View.OnClickListener()
 				{
-					viewTeamCode.dismiss();
-				}
-			});
-			
-			btnChangeCode.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TeamFunctions teamFunctions = new TeamFunctions();
-					JSONObject json = teamFunctions.changeTeamCode(teams.get(info.position).getId());
-					try
+					@Override
+					public void onClick(View v)
 					{
-						if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
-						{
-							teamCode.setText(json.getString("code"));
-							Toast.makeText(MyTeamListActivity.this, "Code changed successfully", Toast.LENGTH_LONG).show();
-						}
-						else
-						{
-							Toast.makeText(MyTeamListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
-							viewTeamCode.dismiss();
-						}
+						viewTeamCode.dismiss();
 					}
-					catch (JSONException e) 
-                	{
-            			e.printStackTrace();
-            		}
-				}
-			});
-			
-	    	viewTeamCode.show();
-	    	return true;
+				});
+				
+				btnChangeCode.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						TeamFunctions teamFunctions = new TeamFunctions();
+						JSONObject json = teamFunctions.changeTeamCode(teams.get(info.position).getId());
+						try
+						{
+							if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
+							{
+								teamCode.setText(json.getString("code"));
+								Toast.makeText(MyTeamListActivity.this, "Code changed successfully", Toast.LENGTH_LONG).show();
+							}
+							else
+							{
+								Toast.makeText(MyTeamListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+								viewTeamCode.dismiss();
+							}
+						}
+						catch (JSONException e) 
+	                	{
+	            			e.printStackTrace();
+	            		}
+					}
+				});
+				
+		    	viewTeamCode.show();
+		    	return true;
 	    }
 	    return false;
 	}

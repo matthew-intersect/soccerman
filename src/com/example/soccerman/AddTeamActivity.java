@@ -112,7 +112,8 @@ public class AddTeamActivity extends Activity
             
             btnCancel.setOnClickListener(new View.OnClickListener()
             {
-            	public void onClick(View view) {
+            	public void onClick(View view)
+            	{
             		Intent dashboard = new Intent(AddTeamActivity.this, DashboardActivity.class);
             		startActivity(dashboard);
             		finish();
