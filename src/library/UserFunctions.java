@@ -51,6 +51,22 @@ public class UserFunctions
 
         return json;
     }
+    
+    /**
+     * function to change user password
+     * @param id
+     * @param password
+     */
+    public JSONObject changeUserPassword(String id, String password)
+    {
+    	List<NameValuePair> params = new ArrayList<NameValuePair>();
+    	params.add(new BasicNameValuePair("tag", Constants.CHANGE_PASSWORD_TAG));
+    	params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+    	
+    	return json;
+    }
      
     /**
      * Function get logged in user's id
@@ -68,6 +84,15 @@ public class UserFunctions
     {
     	DatabaseHandler db = new DatabaseHandler(context);
     	return Integer.valueOf(db.getUserDetails().get("name"));
+    }
+    
+    /**
+     * Function get logged in user's email
+     * */
+    public String getLoggedInUserEmail(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	return db.getUserDetails().get("email");
     }
     
     /**

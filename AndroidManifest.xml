@@ -61,6 +61,10 @@
             android:label="View Team"
             android:name=".PlayerListActivity" />
         
+        <activity
+            android:label="Change Password"
+            android:name=".ChangePasswordActivity" />
+        
     </application>
  
 </manifest>

@@ -11,6 +11,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
     <string name="add_team">Add Team</string>
     <string name="team_name">Team Name</string>
     <string name="home_ground">Home Ground (Optional)</string>

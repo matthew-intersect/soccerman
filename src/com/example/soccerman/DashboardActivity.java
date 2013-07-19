@@ -96,6 +96,9 @@ public class DashboardActivity extends Activity
 		{
 			case R.id.change_password:
 			{
+				Intent changePassword = new Intent(DashboardActivity.this, ChangePasswordActivity.class);
+				startActivity(changePassword);
+				finish();
 				return true;
 			}
 			
