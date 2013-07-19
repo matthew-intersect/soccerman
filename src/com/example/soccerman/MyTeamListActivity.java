@@ -180,7 +180,7 @@ public class MyTeamListActivity extends ListActivity
 							}
 							else
 							{
-								Toast.makeText(MyTeamListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+								Toast.makeText(MyTeamListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
 								viewTeamCode.dismiss();
 							}
 						}

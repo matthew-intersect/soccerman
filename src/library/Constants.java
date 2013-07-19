@@ -11,6 +11,7 @@ public final class Constants
 	
 	public static final String LOGIN_TAG = "login";
 	public static final String REGISTER_TAG = "register";
+	public static final String CHANGE_PASSWORD_TAG = "change_password";
 	public static final String ADD_MATCH_TAG = "add_match";
 	public static final String TEAM_MATCHES = "get_matches";
 	public static final String ADD_ATTENDANCE = "add_attendance";
@@ -39,7 +40,10 @@ public final class Constants
 	public static final String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
 	public static final String TEAM_ADD_MESSAGE = "Your team has been successfully created. For players to join this team, get them to use the following code: ";
 	public static final String JOIN_TEAM_ERROR = "Team with entered code doesn't exist";
-
+	public static final String OLD_PASSWORD_ERROR = "Old password is incorrect";
+	public static final String NEW_PASSWORD_ERROR = "New passwords don't match";
+	public static final String BASIC_ERROR = "Error occurred. Please try again later";
+	public static final String ATTENDANCE_SUCCESS = "Attendance recorded successfully";
 	
 	private Constants()
 	{	

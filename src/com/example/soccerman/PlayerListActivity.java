@@ -115,7 +115,7 @@ public class PlayerListActivity extends ListActivity
 	    			}
 	    			else
 	    			{
-	    				Toast.makeText(PlayerListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+	    				Toast.makeText(PlayerListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
 	    			}
 	        	}
 				catch (JSONException e) 

@@ -126,14 +126,14 @@ public class ViewAttendanceListActivity extends ListActivity
 	                		{
 	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
 	                			{
-	                				Toast.makeText(ViewAttendanceListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+	                				Toast.makeText(ViewAttendanceListActivity.this, Constants.ATTENDANCE_SUCCESS, Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();
 	            					finish();
 	            					startActivity(getIntent());
 	                			}
 	                			else
 	                			{
-	                				Toast.makeText(ViewAttendanceListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+	                				Toast.makeText(ViewAttendanceListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();
 	                			}
 	                		}
@@ -157,14 +157,14 @@ public class ViewAttendanceListActivity extends ListActivity
 	                		{
 	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
 	                			{
-	                				Toast.makeText(ViewAttendanceListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+	                				Toast.makeText(ViewAttendanceListActivity.this, Constants.ATTENDANCE_SUCCESS, Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();
 	            					finish();
 	            					startActivity(getIntent());
 	                			}
 	                			else
 	                			{
-	                				Toast.makeText(ViewAttendanceListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
+	                				Toast.makeText(ViewAttendanceListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
 	            					dialog.dismiss();
 	                			}
 	                		}

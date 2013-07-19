@@ -99,7 +99,7 @@ public class RegisterActivity extends Activity
                         		registerErrorMsg.setText("User with given email already exists");
                         		return;
                         	}
-                        	registerErrorMsg.setText("Error occurred in registration. Try again later");
+                        	registerErrorMsg.setText(Constants.BASIC_ERROR);
                         }
                     }
                 }
