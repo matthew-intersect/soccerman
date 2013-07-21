@@ -65,6 +65,10 @@
             android:label="Change Password"
             android:name=".ChangePasswordActivity" />
         
+        <activity
+            android:label="Edit Lineup"
+            android:name=".EditLineupActivity" />
+        
     </application>
  
 </manifest>

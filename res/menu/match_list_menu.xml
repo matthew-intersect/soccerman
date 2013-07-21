@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/change_attendance" android:title="@string/change_attendance" />
     <item android:id="@+id/view_attendance" android:title="@string/view_attendance" />
+    <item android:id="@+id/edit_lineup" android:title="@string/edit_lineup" />
 </menu>

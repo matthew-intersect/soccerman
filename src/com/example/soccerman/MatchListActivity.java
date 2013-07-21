@@ -92,97 +92,111 @@ public class MatchListActivity extends ListActivity
 	    {
 	    	menu.getItem(0).setVisible(false);
 	    }
+	    if(teamRole.equals(TeamRole.PLAYER))
+	    {
+	    	menu.getItem(2).setVisible(false);
+	    }
 	}
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) 
 	{
 		final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.change_attendance:
-			final Dialog dialog = new Dialog(MatchListActivity.this);
-			dialog.setTitle("Are you playing?");
-			dialog.setContentView(R.layout.change_attendance);
-			
-			final MatchFunctions matchFunctions = new MatchFunctions();
-			btnYes = (Button) dialog.findViewById(R.id.attend_yes);
-			btnNo = (Button) dialog.findViewById(R.id.attend_no);
-			final String currentUser = new UserFunctions().getLoggedInUserId(getApplicationContext());
-			
-			btnYes.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
+		switch (item.getItemId())
+		{
+			case R.id.change_attendance:
+				final Dialog dialog = new Dialog(MatchListActivity.this);
+				dialog.setTitle("Are you playing?");
+				dialog.setContentView(R.layout.change_attendance);
+				
+				final MatchFunctions matchFunctions = new MatchFunctions();
+				btnYes = (Button) dialog.findViewById(R.id.attend_yes);
+				btnNo = (Button) dialog.findViewById(R.id.attend_no);
+				final String currentUser = new UserFunctions().getLoggedInUserId(getApplicationContext());
+				
+				btnYes.setOnClickListener(new View.OnClickListener()
 				{
-					JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 1); // 1 for yes
-					try
-                	{
-                		if (json.getString(Constants.KEY_SUCCESS) != null) 
-                		{
-                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
-                			{
-                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
-            					dialog.dismiss();
-            					finish();
-            					startActivity(getIntent());
-                			}
-                			else
-                			{
-                				Toast.makeText(MatchListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
-            					dialog.dismiss();
-                			}
-                		}
-                	}
-					catch (JSONException e) 
-                	{
-            			e.printStackTrace();
-            		}
-				}
-			});
-			
-			btnNo.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
+					@Override
+					public void onClick(View v)
+					{
+						JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 1); // 1 for yes
+						try
+	                	{
+	                		if (json.getString(Constants.KEY_SUCCESS) != null) 
+	                		{
+	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
+	                			{
+	                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+	            					dialog.dismiss();
+	            					finish();
+	            					startActivity(getIntent());
+	                			}
+	                			else
+	                			{
+	                				Toast.makeText(MatchListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
+	            					dialog.dismiss();
+	                			}
+	                		}
+	                	}
+						catch (JSONException e) 
+	                	{
+	            			e.printStackTrace();
+	            		}
+					}
+				});
+				
+				btnNo.setOnClickListener(new View.OnClickListener()
 				{
-					JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 0); // 0 for no
-					try
-                	{
-                		if (json.getString(Constants.KEY_SUCCESS) != null) 
-                		{
-                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
-                			{
-                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
-            					dialog.dismiss();
-            					finish();
-            					startActivity(getIntent());
-                			}
-                			else
-                			{
-                				Toast.makeText(MatchListActivity.this, "Error occurred. Please try again later", Toast.LENGTH_LONG).show();
-            					dialog.dismiss();
-                			}
-                		}
-                	}
-					catch (JSONException e) 
-                	{
-            			e.printStackTrace();
-            		}
-				}
-			});
-			
-			dialog.show();
-	        return true;
-	    case R.id.view_attendance:
-	    	Intent matchList = new Intent(MatchListActivity.this, ViewAttendanceListActivity.class);
-	    	matchList.putExtra("matchId", matches.get(info.position).getId());
-	    	matchList.putExtra("teamId", teamId);
-	    	matchList.putExtra("teamHomeGround", teamHomeGround);
-	    	matchList.putExtra("teamRole", (Parcelable) teamRole);
-	    	startActivity(matchList);
-	    	finish();
-	    	return true;
-	    }
+					@Override
+					public void onClick(View v)
+					{
+						JSONObject json = matchFunctions.addAttendance(currentUser, matches.get(info.position).getId(), 0); // 0 for no
+						try
+	                	{
+	                		if (json.getString(Constants.KEY_SUCCESS) != null) 
+	                		{
+	                			if(Integer.parseInt(json.getString(Constants.KEY_SUCCESS)) == 1)
+	                			{
+	                				Toast.makeText(MatchListActivity.this, "Attendance recorded successfully", Toast.LENGTH_LONG).show();
+	            					dialog.dismiss();
+	            					finish();
+	            					startActivity(getIntent());
+	                			}
+	                			else
+	                			{
+	                				Toast.makeText(MatchListActivity.this, Constants.BASIC_ERROR, Toast.LENGTH_LONG).show();
+	            					dialog.dismiss();
+	                			}
+	                		}
+	                	}
+						catch (JSONException e) 
+	                	{
+	            			e.printStackTrace();
+	            		}
+					}
+				});
+				
+				dialog.show();
+		        return true;
+		    case R.id.view_attendance:
+		    	Intent matchList = new Intent(MatchListActivity.this, ViewAttendanceListActivity.class);
+		    	matchList.putExtra("matchId", matches.get(info.position).getId());
+		    	matchList.putExtra("teamId", teamId);
+		    	matchList.putExtra("teamHomeGround", teamHomeGround);
+		    	matchList.putExtra("teamRole", (Parcelable) teamRole);
+		    	startActivity(matchList);
+		    	finish();
+		    	return true;
+		    case R.id.edit_lineup:
+		    	Intent editLineup = new Intent(MatchListActivity.this, EditLineupActivity.class);
+		    	editLineup.putExtra("matchId", matches.get(info.position).getId());
+		    	editLineup.putExtra("teamId", teamId);
+		    	editLineup.putExtra("teamHomeGround", teamHomeGround);
+		    	editLineup.putExtra("teamRole", (Parcelable) teamRole);
+		    	startActivity(editLineup);
+		    	finish();
+		    	return true;
+		}
 	    return false;
 	}
 	
