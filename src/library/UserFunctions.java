@@ -12,10 +12,12 @@ import android.content.Context;
 public class UserFunctions 
 {
     private JSONParser jsonParser;
+    private Constants constants;
  
     public UserFunctions()
     {
         jsonParser = new JSONParser();
+        constants = new Constants();
     }
      
     /**
@@ -29,7 +31,7 @@ public class UserFunctions
         params.add(new BasicNameValuePair("tag", Constants.LOGIN_TAG));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(constants.USERS_DB_URL, params);
 
         return json;
     }
@@ -47,7 +49,7 @@ public class UserFunctions
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(constants.USERS_DB_URL, params);
 
         return json;
     }
@@ -63,7 +65,7 @@ public class UserFunctions
     	params.add(new BasicNameValuePair("tag", Constants.CHANGE_PASSWORD_TAG));
     	params.add(new BasicNameValuePair("id", id));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.USERS_DB_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(constants.USERS_DB_URL, params);
     	
     	return json;
     }

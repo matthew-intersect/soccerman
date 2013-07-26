@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 {
     public DatabaseHandler(Context context)
     {
-        super(context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
+        super(context, new Constants().DATABASE_NAME, null, Constants.DATABASE_VERSION);
     }
  
     @Override

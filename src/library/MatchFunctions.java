@@ -16,10 +16,12 @@ import org.json.JSONObject;
 public class MatchFunctions
 {
 	private JSONParser jsonParser;
+	private Constants constants;
 
     public MatchFunctions()
     {
     	jsonParser = new JSONParser();
+    	constants = new Constants();
     }
     
     /**
@@ -38,7 +40,7 @@ public class MatchFunctions
         params.add(new BasicNameValuePair("venue", venue));
         params.add(new BasicNameValuePair("home", home));
         params.add(new BasicNameValuePair("time", String.valueOf(time)));
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.MATCHESS_DB_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(constants.MATCHESS_DB_URL, params);
         
         return json;
     }
@@ -54,7 +56,7 @@ public class MatchFunctions
         params.add(new BasicNameValuePair("team", team));
         try
         {
-        	JSONObject json = jsonParser.getJSONFromUrl(Constants.MATCHESS_DB_URL, params);
+        	JSONObject json = jsonParser.getJSONFromUrl(constants.MATCHESS_DB_URL, params);
         	if(Integer.parseInt(json.getString("success")) == 1)
         	{
 	        	ArrayList<Match> matches = new ArrayList<Match>();
@@ -92,7 +94,7 @@ public class MatchFunctions
         params.add(new BasicNameValuePair("match", String.valueOf(match)));
         params.add(new BasicNameValuePair("attend", String.valueOf(attendance)));
         
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.MATCHESS_DB_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(constants.MATCHESS_DB_URL, params);
         
         return json;
 	}
@@ -108,7 +110,7 @@ public class MatchFunctions
         params.add(new BasicNameValuePair("match", match));
         try
         {
-        	JSONObject json = jsonParser.getJSONFromUrl(Constants.MATCHESS_DB_URL, params);
+        	JSONObject json = jsonParser.getJSONFromUrl(constants.MATCHESS_DB_URL, params);
         	if(Integer.parseInt(json.getString("success")) == 1)
         	{
 	        	ArrayList<PlayerAttendance> playerAttendances = new ArrayList<PlayerAttendance>();
@@ -157,7 +159,7 @@ public class MatchFunctions
         params.add(new BasicNameValuePair("player", player));
         try
         {
-        	JSONObject json = jsonParser.getJSONFromUrl(Constants.MATCHESS_DB_URL, params);
+        	JSONObject json = jsonParser.getJSONFromUrl(constants.MATCHESS_DB_URL, params);
         	String attendance = json.getString("attendance");
         	if(attendance.equals("1"))
         	{

@@ -1,13 +1,16 @@
 package library;
 
+import java.io.IOException;
+import java.util.Properties;
+
 public final class Constants
 {
 	// database request codes and tags
-	public static final String DATABASE_NAME = "android_api";
+	public String DATABASE_NAME = "android_api";
 	public static final int DATABASE_VERSION = 2;
-	public static final String USERS_DB_URL = "http://10.0.2.2/ah_login_api/user_index.php";
-	public static final String TEAMS_DB_URL = "http://10.0.2.2/ah_login_api/team_index.php";
-	public static final String MATCHESS_DB_URL = "http://10.0.2.2/ah_login_api/match_index.php";
+	public String USERS_DB_URL = "http://10.0.2.2/ah_login_api/user_index.php";
+	public String TEAMS_DB_URL = "http://10.0.2.2/ah_login_api/team_index.php";
+	public String MATCHESS_DB_URL = "http://10.0.2.2/ah_login_api/match_index.php";
 	
 	public static final String LOGIN_TAG = "login";
 	public static final String REGISTER_TAG = "register";
@@ -40,12 +43,27 @@ public final class Constants
 	public static final String TEAM_CODE_MESSAGE = "For players to join this team, get them to use the following code: ";
 	public static final String TEAM_ADD_MESSAGE = "Your team has been successfully created. For players to join this team, get them to use the following code: ";
 	public static final String JOIN_TEAM_ERROR = "Team with entered code doesn't exist";
+	public static final String PASSWORD_LENGTH_ERROR = "Password must be between 6 and 20 characters";
 	public static final String OLD_PASSWORD_ERROR = "Old password is incorrect";
 	public static final String NEW_PASSWORD_ERROR = "New passwords don't match";
 	public static final String BASIC_ERROR = "Error occurred. Please try again later";
 	public static final String ATTENDANCE_SUCCESS = "Attendance recorded successfully";
 	
-	private Constants()
-	{	
+	public Constants()
+	{
+		Properties prop = new Properties();
+		
+		try
+		{
+			prop.load(getClass().getResourceAsStream("dev.properties"));
+			DATABASE_NAME = prop.getProperty("DATABASE_NAME");
+			USERS_DB_URL = prop.getProperty("USERS_DB_URL");
+			TEAMS_DB_URL = prop.getProperty("TEAMS_DB_URL");
+			MATCHESS_DB_URL = prop.getProperty("MATCHES_DB_URL");
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
