@@ -54,6 +54,11 @@ public class ChangePasswordActivity extends Activity
 					{
 						if(newPassword.equals(confirmNewPassword))
 						{
+							if(newPassword.length() < 6 || newPassword.length() > 20)
+							{
+								changePasswordErrorMsg.setText(Constants.PASSWORD_LENGTH_ERROR);
+								return;
+							}
 							JSONObject json = userFunctions.changeUserPassword(userFunctions.getLoggedInUserId(getApplicationContext()),
 								newPassword);
 							if(json.getString(Constants.KEY_SUCCESS) != null

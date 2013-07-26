@@ -61,6 +61,10 @@ public class RegisterActivity extends Activity
                 {
                 	errors.append("Passwords don't match\n");
                 }
+                if(password.length() < 6 || password.length() > 20)
+                {
+                	errors.append(Constants.PASSWORD_LENGTH_ERROR + "\n");
+                }
                 
                 if(errors.toString() != "")
                 {
